@@ -1,0 +1,62 @@
+{
+    "id": "pimcore_lmf_examdefinition",
+    "description": "",
+    "modificationDate": 1635684051,
+    "parentClass": "",
+    "implementsInterfaces": "",
+    "listingParentClass": "",
+    "useTraits": "",
+    "listingUseTraits": "",
+    "allowInherit": false,
+    "allowVariants": false,
+    "showVariants": false,
+    "layoutDefinitions": {
+        "fieldtype": "panel",
+        "layout": null,
+        "border": false,
+        "name": "pimcore_root",
+        "type": null,
+        "region": null,
+        "title": null,
+        "width": 0,
+        "height": 0,
+        "collapsible": false,
+        "collapsed": false,
+        "bodyStyle": null,
+        "datatype": "layout",
+        "permissions": null,
+        "childs": [],
+        "locked": false,
+        "icon": null,
+        "labelWidth": 100,
+        "labelAlign": "left"
+    },
+    "icon": "\/bundles\/pimcoreadmin\/img\/flat-color-icons\/file-types.svg",
+    "previewUrl": "",
+    "group": "LearningManagement",
+    "showAppLoggerTab": false,
+    "linkGeneratorReference": "",
+    "previewGeneratorReference": "",
+    "compositeIndices": [],
+    "generateTypeDeclarations": true,
+    "showFieldLookup": false,
+    "propertyVisibility": {
+        "grid": {
+            "id": true,
+            "key": false,
+            "path": true,
+            "published": true,
+            "modificationDate": true,
+            "creationDate": true
+        },
+        "search": {
+            "id": true,
+            "key": false,
+            "path": true,
+            "published": true,
+            "modificationDate": true,
+            "creationDate": true
+        }
+    },
+    "enableGridLocking": false
+}
