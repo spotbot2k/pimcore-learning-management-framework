@@ -2,7 +2,7 @@
 
 namespace LearningManagementFrameworkBundle;
 
-
+use LearningManagementFrameworkBundle\Tools\Installer;
 use Pimcore\Extension\Bundle\AbstractPimcoreBundle;
 use Pimcore\Extension\Bundle\Traits\PackageVersionTrait;
 
@@ -23,20 +23,5 @@ class PimcoreLearningManagementFrameworkBundle extends AbstractPimcoreBundle
     public function getInstaller()
     {
         return $this->container->get(Installer::class);
-    }
-
-    /**
-     * @todo: add real check
-     *
-     * @return boolean
-     */
-    public function isInstalled()
-    {
-        return false;
-    }
-
-    public function canBeInstalled()
-    {
-        return !$this->isInstalled();
     }
 }

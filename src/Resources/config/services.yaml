@@ -4,4 +4,7 @@ services:
     autowire: true
     autoconfigure: true
 
-  LearningManagementFrameworkBundle\Installer: ~
+  LearningManagementFrameworkBundle\Tools\Installer:
+    public: true
+    arguments:
+      $bundle: "@=service('kernel').getBundle('PimcoreLearningManagementFrameworkBundle')"

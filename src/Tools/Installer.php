@@ -1,22 +1,24 @@
 <?php
 
-namespace LearningManagementFrameworkBundle;
+namespace LearningManagementFrameworkBundle\Tools;
 
 use Pimcore\Logger;
-use Pimcore\Extension\Bundle\Installer\AbstractInstaller;
+use Pimcore\Extension\Bundle\Installer\SettingsStoreAwareInstaller;
 
-class Installer extends AbstractInstaller
+class Installer extends SettingsStoreAwareInstaller
 {
     public function install()
     {
         $this->installClasses();
+
+        parent::install();
 
         return true;
     }
 
     public function installClasses()
     {
-        $sourcePath = __DIR__.'/../install/class_source';
+        $sourcePath = __DIR__.'/../Resources/install/class_source';
 
         self::installClass('ExamDefinition', $sourcePath.'/class_ExamDefinition_export.json');
     }
