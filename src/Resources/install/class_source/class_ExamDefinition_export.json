@@ -1,7 +1,7 @@
 {
     "id": "LMF_ED",
     "description": "",
-    "modificationDate": 1635772878,
+    "modificationDate": 1635774486,
     "parentClass": "",
     "implementsInterfaces": "",
     "listingParentClass": "",
@@ -160,7 +160,7 @@
                             {
                                 "fieldtype": "fieldcollections",
                                 "allowedTypes": [
-                                    "Question"
+                                    "MultipleChoise"
                                 ],
                                 "lazyLoading": true,
                                 "maxItems": "",
