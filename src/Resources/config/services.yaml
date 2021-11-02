@@ -8,3 +8,5 @@ services:
     public: true
     arguments:
       $bundle: "@=service('kernel').getBundle('PimcoreLearningManagementFrameworkBundle')"
+
+  LearningManagementFrameworkBundle\Helper\ExamHelper: ~

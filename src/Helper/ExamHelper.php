@@ -1,18 +1,20 @@
 <?php
 
-namespace LearningManagementFrameworkBundle\Model;
+namespace LearningManagementFrameworkBundle\Helper;
 
-class ExamDefinition extends \Pimcore\Model\DataObject\ExamDefinition
+use Pimcore\Model\DataObject\ExamDefinition;
+
+class ExamHelper
 {
-    public function toJson()
+    public function buildArray(ExamDefinition $exam)
     {
         $output = [
-            'title'       => $this->getTitle(),
-            'description' => $this->getDescription(),
+            'title'       => $exam->getTitle(),
+            'description' => $exam->getDescription(),
             'questions'   => [],
         ];
 
-        foreach ($this->getQuestions() as $question) {
+        foreach ($exam->getQuestions() as $question) {
             $buffer = [
                 'type'        => $question->getType(),
                 'question'    => $question->getQuestion(),
@@ -28,5 +30,10 @@ class ExamDefinition extends \Pimcore\Model\DataObject\ExamDefinition
         }
 
         return $output;
+    }
+
+    public function buildJson(ExamDefinition $exam)
+    {
+        return json_encode($this->buildArray($exam), JSON_THROW_ON_ERROR);
     }
 }

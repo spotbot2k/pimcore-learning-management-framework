@@ -1,5 +1,0 @@
-
-pimcore:
-  models:
-    class_overrides:
-      Pimcore\Model\DataObject\ExamDefinition: LearningManagementFrameworkBundle\Model\ExamDefinition
