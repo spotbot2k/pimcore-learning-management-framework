@@ -9,6 +9,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 class MultipleChoiseType extends AbstractType
 {
@@ -24,8 +26,10 @@ class MultipleChoiseType extends AbstractType
             }
 
             $form->add('answer', ChoiceType::class, [
-                'mapped'  => false,
-                'choices' => $choices,
+                'mapped'   => false,
+                'choices'  => $choices,
+                'multiple' => true,
+                'expanded' => true,
             ]);
         });
     }
