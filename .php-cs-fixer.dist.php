@@ -19,7 +19,7 @@ $config->setRules([
     'header_comment'         => [
         'comment_type' => 'PHPDoc',
         'header' => 
-            'This file is a part of the Pimcore Learning Management Framework' . PHP_EOL .
+            'This file is part of the Pimcore Learning Management Framework' . PHP_EOL .
             'Docs and updates: https://github.com/spotbot2k/pimcore-learning-management-framework' . PHP_EOL .
             PHP_EOL .
             ' @license    http://www.pimcore.org/license     GPLv3 and PCL'
