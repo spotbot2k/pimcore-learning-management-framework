@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is a part of the Pimcore Learning Management Framework
+ * This file is part of the Pimcore Learning Management Framework
  * Docs and updates: https://github.com/spotbot2k/pimcore-learning-management-framework
  *
  *  @license    http://www.pimcore.org/license     GPLv3 and PCL
