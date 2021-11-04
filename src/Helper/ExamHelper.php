@@ -1,5 +1,18 @@
 <?php
 
+/**
+ * Pimcore
+ *
+ * This source file is available under two different licenses:
+ * - GNU General Public License version 3 (GPLv3)
+ * - Pimcore Commercial License (PCL)
+ * Full copyright and license information is available in
+ * LICENSE.md which is distributed with this source code.
+ *
+ *  @copyright  Copyright (c) Pimcore GmbH (http://www.pimcore.org)
+ *  @license    http://www.pimcore.org/license     GPLv3 and PCL
+ */
+
 namespace LearningManagementFrameworkBundle\Helper;
 
 use Pimcore\Model\DataObject\ExamDefinition;
@@ -31,13 +44,14 @@ class ExamHelper
         $ratio = $correctAnswers / $exam->getQuestions()->getCount() * 100;
 
         foreach ($exam->getGrades() as $grade) {
-            if (array_key_exists("Ratio", $grade) && $ratio < $grade["Ratio"]->getData()) {
+            if (array_key_exists('Ratio', $grade) && $ratio < $grade['Ratio']->getData()) {
                 continue;
             }
-            if (array_key_exists("TimeLimit", $grade) && $timeTaken > $grade["TimeLimit"]->getData()) {
+            if (array_key_exists('TimeLimit', $grade) && $timeTaken > $grade['TimeLimit']->getData()) {
                 continue;
             }
-            $gradeAchieved = $grade["Title"]->getData();
+            $gradeAchieved = $grade['Title']->getData();
+
             break;
         }
 
@@ -67,7 +81,7 @@ class ExamHelper
             ];
 
             foreach ($question->getAnswer() as $answer) {
-                $buffer['answers'][] = $answer["Title"]->getData();
+                $buffer['answers'][] = $answer['Title']->getData();
             }
 
             $output['questions'][] = $buffer;
@@ -84,13 +98,13 @@ class ExamHelper
     private function processQuestion(string $type, iterable $answers, $submitedValue)
     {
         switch ($type) {
-            case "MultipleChoise":
+            case 'MultipleChoise':
                 $isCorrect = true;
                 foreach ($answers as $answer) {
-                    if ($answer["IsCorrect"]->getData() && !in_array($answer["Title"]->getData(), $submitedValue)) {
+                    if ($answer['IsCorrect']->getData() && !in_array($answer['Title']->getData(), $submitedValue)) {
                         $isCorrect = false;
                     }
-                    if (!$answer["IsCorrect"]->getData() && in_array($answer["Title"]->getData(), $submitedValue)) {
+                    if (!$answer['IsCorrect']->getData() && in_array($answer['Title']->getData(), $submitedValue)) {
                         $isCorrect = false;
                     }
                 }

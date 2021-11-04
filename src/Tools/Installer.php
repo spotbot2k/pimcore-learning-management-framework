@@ -1,10 +1,23 @@
 <?php
 
+/**
+ * Pimcore
+ *
+ * This source file is available under two different licenses:
+ * - GNU General Public License version 3 (GPLv3)
+ * - Pimcore Commercial License (PCL)
+ * Full copyright and license information is available in
+ * LICENSE.md which is distributed with this source code.
+ *
+ *  @copyright  Copyright (c) Pimcore GmbH (http://www.pimcore.org)
+ *  @license    http://www.pimcore.org/license     GPLv3 and PCL
+ */
+
 namespace LearningManagementFrameworkBundle\Tools;
 
-use Pimcore\Logger;
 use Pimcore\Extension\Bundle\Installer\Exception\InstallationException;
 use Pimcore\Extension\Bundle\Installer\SettingsStoreAwareInstaller;
+use Pimcore\Logger;
 use Pimcore\Model\DataObject\ClassDefinition;
 use Pimcore\Model\DataObject\ClassDefinition\Service;
 use Pimcore\Model\DataObject\Fieldcollection;
@@ -62,7 +75,7 @@ class Installer extends SettingsStoreAwareInstaller
             $fieldCollection = new Fieldcollection\Definition();
             $fieldCollection->setKey($key);
 
-            $data = file_get_contents(sprintf("%s/fieldcollection_%s_export.json", $filepath, $key));
+            $data = file_get_contents(sprintf('%s/fieldcollection_%s_export.json', $filepath, $key));
             $success = Service::importFieldCollectionFromJson($fieldCollection, $data);
 
             if (!$success) {

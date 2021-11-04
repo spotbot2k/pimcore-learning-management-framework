@@ -1,16 +1,27 @@
 <?php
 
+/**
+ * Pimcore
+ *
+ * This source file is available under two different licenses:
+ * - GNU General Public License version 3 (GPLv3)
+ * - Pimcore Commercial License (PCL)
+ * Full copyright and license information is available in
+ * LICENSE.md which is distributed with this source code.
+ *
+ *  @copyright  Copyright (c) Pimcore GmbH (http://www.pimcore.org)
+ *  @license    http://www.pimcore.org/license     GPLv3 and PCL
+ */
+
 namespace LearningManagementFrameworkBundle\Form;
 
 use Pimcore\Model\DataObject\Fieldcollection\Data\MultipleChoise;
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
-use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints;
-use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 class MultipleChoiseType extends AbstractType
 {
@@ -22,7 +33,7 @@ class MultipleChoiseType extends AbstractType
             $choices = [];
 
             foreach ($question->getAnswer() as $answer) {
-                $choices[$answer["Title"]->getData()] = $answer["Title"]->getData();
+                $choices[$answer['Title']->getData()] = $answer['Title']->getData();
             }
 
             $form->add('answer', ChoiceType::class, [
