@@ -22,7 +22,7 @@ $config->setRules([
             'This file is part of the Pimcore Learning Management Framework' . PHP_EOL .
             'Docs and updates: https://github.com/spotbot2k/pimcore-learning-management-framework' . PHP_EOL .
             PHP_EOL .
-            ' @license    http://www.pimcore.org/license     GPLv3 and PCL'
+            ' @license GPLv3'
     ],
 
     'blank_line_before_statement'         => true,
