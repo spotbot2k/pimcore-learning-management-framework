@@ -89,21 +89,14 @@ class ExamHelper
         return json_encode($this->buildArray($exam), JSON_THROW_ON_ERROR);
     }
 
-    private function processQuestion(string $type, iterable $answers, $submitedValue)
+    private function processQuestion(string $type, iterable $answers, $submitedValue): bool
     {
-        switch ($type) {
-            case 'MultipleChoise':
-                $isCorrect = true;
-                foreach ($answers as $answer) {
-                    if ($answer['IsCorrect']->getData() && !in_array($answer['Title']->getData(), $submitedValue)) {
-                        $isCorrect = false;
-                    }
-                    if (!$answer['IsCorrect']->getData() && in_array($answer['Title']->getData(), $submitedValue)) {
-                        $isCorrect = false;
-                    }
-                }
+        $class = sprintf("LearningManagementFrameworkBundle\Processor\%sProcessor", $type);
 
-                return $isCorrect;
+        if (class_exists($class)) {
+            return $class::processQuestion($type, $answers, $submitedValue);
         }
+
+        return false;
     }
 }
