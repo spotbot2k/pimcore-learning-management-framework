@@ -60,7 +60,7 @@ class ExamHelper
             ) {
                 continue;
             }
-            
+
             $gradeAchieved = $grade['title']->getData();
 
             break;
