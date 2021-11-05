@@ -1,10 +1,17 @@
 <?php
 
+/**
+ * This file is part of the Pimcore Learning Management Framework
+ * Docs and updates: https://github.com/spotbot2k/pimcore-learning-management-framework
+ *
+ *  @license GPLv3
+ */
+
 namespace LearningManagementFrameworkBundle\Question;
 
 use Pimcore\Model\DataObject\Fieldcollection\Data\AbstractData;
-use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\FormEvent;
 
 class MultipleChoiseQuestion implements QuestionInterface
 {
