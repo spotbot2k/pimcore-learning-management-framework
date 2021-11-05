@@ -33,10 +33,13 @@ class ExamType extends AbstractType
             'data'       => time(),
             'empty_data' => time(),
         ]);
-        $builder->add('submit', SubmitType::class);
 
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
             $event->getForm()->add('questions', QuestionCollectionType::class);
+        });
+
+        $builder->addEventListener(FormEvents::POST_SET_DATA, function (FormEvent $event) {
+            $event->getForm()->add('submit', SubmitType::class);
         });
     }
 

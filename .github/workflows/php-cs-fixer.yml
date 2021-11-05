@@ -1,6 +1,7 @@
 
 name: "PHP-CS-Fixer"
 
+# todo: set it to merge request
 on: push
 
 jobs:
