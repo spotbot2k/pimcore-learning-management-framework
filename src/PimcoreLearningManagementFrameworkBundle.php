@@ -22,6 +22,24 @@ class PimcoreLearningManagementFrameworkBundle extends AbstractPimcoreBundle
         return 'Provides tools to build a LMS within Pimcore installation';
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function getAdminIframePath()
+    {
+        return '/admin/lmf/dashboard';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getJsPaths()
+    {
+        return [
+            '/bundles/pimcorelearningmanagementframework/js/startup.js',
+        ];
+    }
+
     protected function getComposerPackageName(): string
     {
         return 'spotbot2k/pimcore-learning-management-framework';

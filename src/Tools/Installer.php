@@ -9,6 +9,7 @@
 
 namespace LearningManagementFrameworkBundle\Tools;
 
+use Pimcore\Db;
 use Pimcore\Extension\Bundle\Installer\Exception\InstallationException;
 use Pimcore\Extension\Bundle\Installer\SettingsStoreAwareInstaller;
 use Pimcore\Logger;
@@ -18,10 +19,25 @@ use Pimcore\Model\DataObject\Fieldcollection;
 
 class Installer extends SettingsStoreAwareInstaller
 {
+    private $permissionsToInstall = [
+        'plugin_lmf_manage',
+        'plugin_lmf_view',
+    ];
+
+    /**
+     * {@inheritdoc}
+     */
+    public function needsReloadAfterInstall()
+    {
+        return true;
+    }
+
     public function install()
     {
         $this->installClasses();
         $this->installFieldCollections();
+        $this->installPermissions();
+        $this->installDatabaseTables();
 
         parent::install();
 
@@ -55,7 +71,10 @@ class Installer extends SettingsStoreAwareInstaller
     public function installFieldCollections()
     {
         $sourcePath = __DIR__.'/../Resources/install/fieldcollection_source';
-        $collections = ['Question'];
+        $collections = [
+            'MultipleChoise',
+            'TextInput',
+        ];
 
         foreach ($collections as $key) {
             self::installFieldCollection($key, $sourcePath);
@@ -76,5 +95,26 @@ class Installer extends SettingsStoreAwareInstaller
                 throw new InstallationException(sprintf('Failed to import field collection "%s"', $key));
             }
         }
+    }
+
+    public function installPermissions()
+    {
+        foreach ($this->permissionsToInstall as $key) {
+            $permission = new \Pimcore\Model\User\Permission\Definition();
+            $permission->setKey($key);
+
+            $res = new \Pimcore\Model\User\Permission\Definition\Dao();
+            $res->configure();
+            $res->setModel($permission);
+            $res->save();
+        }
+    }
+
+    /**
+     * @todo: create table where the progress will be storred
+     */
+    public function installDatabaseTables()
+    {
+        // Db::get()->query();
     }
 }

@@ -22,11 +22,14 @@ class QuestionCollectionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
-            $collection = $event->getData();
             $form = $event->getForm();
 
             $form->add('items', CollectionType::class, [
-                'entry_type' => MultipleChoiseType::class,
+                'label'      => false,
+                'entry_type' => QuestionType::class,
+                'entry_options' => [
+                    'label'     => false,
+                ],
             ]);
         });
     }

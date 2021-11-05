@@ -4,3 +4,5 @@ As it is implied by the name this repository does not provide a ready to use sol
 
 1. [Installation](doc/01_Installation.md)
 2. Usage example
+
+Includes parts of [Material design icons](https://github.com/google/material-design-icons/blob/master/LICENSE)

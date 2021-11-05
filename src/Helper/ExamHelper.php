@@ -10,9 +10,22 @@
 namespace LearningManagementFrameworkBundle\Helper;
 
 use Pimcore\Model\DataObject\ExamDefinition;
+use Pimcore\Model\DataObject\Fieldcollection\Data\AbstractData;
+use Symfony\Component\Security\Core\Security;
 
 class ExamHelper
 {
+    private $user = null;
+
+    public function __construct(string $defaultStudentClass, Security $security)
+    {
+        $user = $security->getUser();
+        $class = sprintf("Pimcore\Model\DataObject\%s", $defaultStudentClass);
+        if ($user instanceof $class) {
+            $this->user = $security->getUser();
+        }
+    }
+
     public function process(ExamDefinition $exam, array $data): array
     {
         $correctAnswers = 0;
@@ -22,7 +35,7 @@ class ExamHelper
 
         if (array_key_exists('questions', $data)) {
             foreach ($exam->getQuestions() as $idx => $question) {
-                $isCorrect = $this->processQuestion($question->getType(), $question->getAnswer(), $data['questions']['items'][$idx]['answer']);
+                $isCorrect = $this->processQuestion($question->getType(), $question, $data['questions']['items'][$idx]['answer']);
                 if ($isCorrect) {
                     $correctAnswers += 1;
                 } else {
@@ -38,24 +51,38 @@ class ExamHelper
         $ratio = $correctAnswers / $exam->getQuestions()->getCount() * 100;
 
         foreach ($exam->getGrades() as $grade) {
-            if (array_key_exists('Ratio', $grade) && $ratio < $grade['Ratio']->getData()) {
+            if (array_key_exists('ratio', $grade) && $ratio < $grade['ratio']->getData()) {
                 continue;
             }
-            if (array_key_exists('TimeLimit', $grade) && $timeTaken > $grade['TimeLimit']->getData()) {
+            if (array_key_exists('timeLimit', $grade)
+                && !is_null($grade['timeLimit']->getData())
+                && $timeTaken > $grade['timeLimit']->getData()
+            ) {
                 continue;
             }
-            $gradeAchieved = $grade['Title']->getData();
+            
+            $gradeAchieved = $grade['title']->getData();
 
             break;
         }
 
         return [
-            'correct' => $correctAnswers,
+            'correct'   => $correctAnswers,
             'incorrect' => $incorrectAnswers,
             'ratio'     => $ratio,
             'time'      => time() - $data['initts'],
             'grade'     => $gradeAchieved,
         ];
+    }
+
+    public function isSudentLoggedIn()
+    {
+        return is_null($this->user);
+    }
+
+    public function getStudent()
+    {
+        return $this->user;
     }
 
     public function buildArray(ExamDefinition $exam)
@@ -89,12 +116,12 @@ class ExamHelper
         return json_encode($this->buildArray($exam), JSON_THROW_ON_ERROR);
     }
 
-    private function processQuestion(string $type, iterable $answers, $submitedValue): bool
+    private function processQuestion(string $type, AbstractData $question, $submitedValue): bool
     {
-        $class = sprintf("LearningManagementFrameworkBundle\Processor\%sProcessor", $type);
+        $class = sprintf("LearningManagementFrameworkBundle\Question\%sQuestion", $type);
 
         if (class_exists($class)) {
-            return $class::processQuestion($type, $answers, $submitedValue);
+            return $class::processQuestion($type, $question, $submitedValue);
         }
 
         return false;

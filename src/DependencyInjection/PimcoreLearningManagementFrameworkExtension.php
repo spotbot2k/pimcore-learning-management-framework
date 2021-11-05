@@ -27,5 +27,9 @@ class PimcoreLearningManagementFrameworkExtension extends Extension
         );
 
         $loader->load('services.yaml');
+
+        $configuration = new Configuration();
+        $config = $this->processConfiguration($configuration, $configs);
+        $container->setParameter('pimcore_learning_management_framework.student_class', $config['student_class']);
     }
 }

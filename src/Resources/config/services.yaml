@@ -4,9 +4,16 @@ services:
     autowire: true
     autoconfigure: true
 
+  LearningManagementFrameworkBundle\Controller\:
+    resource: '../../Controller'
+    public: true
+    tags: ['controller.service_arguments']
+
   LearningManagementFrameworkBundle\Tools\Installer:
     public: true
     arguments:
       $bundle: "@=service('kernel').getBundle('PimcoreLearningManagementFrameworkBundle')"
 
-  LearningManagementFrameworkBundle\Helper\ExamHelper: ~
+  LearningManagementFrameworkBundle\Helper\ExamHelper:
+    arguments:
+      $defaultStudentClass: '%pimcore_learning_management_framework.student_class%'

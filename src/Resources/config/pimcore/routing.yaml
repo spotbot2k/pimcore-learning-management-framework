@@ -1,0 +1,4 @@
+learning_management_framework:
+  resource: "@PimcoreLearningManagementFrameworkBundle/Controller/"
+  type:     annotation
+  prefix:   /
