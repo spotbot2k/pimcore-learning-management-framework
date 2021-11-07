@@ -1,7 +1,7 @@
 {
     "id": "LMF_ED",
     "description": "",
-    "modificationDate": 1636105774,
+    "modificationDate": 1636293375,
     "parentClass": "",
     "implementsInterfaces": "",
     "listingParentClass": "",
@@ -12,14 +12,15 @@
     "showVariants": false,
     "layoutDefinitions": {
         "fieldtype": "panel",
+        "labelWidth": 100,
         "layout": null,
         "border": false,
         "name": "pimcore_root",
         "type": null,
         "region": null,
         "title": null,
-        "width": 0,
-        "height": 0,
+        "width": null,
+        "height": null,
         "collapsible": false,
         "collapsed": false,
         "bodyStyle": null,
@@ -44,6 +45,7 @@
                 "childs": [
                     {
                         "fieldtype": "panel",
+                        "labelWidth": 100,
                         "layout": null,
                         "border": false,
                         "name": "General",
@@ -63,6 +65,7 @@
                                 "width": "",
                                 "defaultValue": null,
                                 "columnLength": 190,
+                                "phpdocType": "string",
                                 "regex": "",
                                 "unique": false,
                                 "showCharCount": false,
@@ -86,9 +89,9 @@
                                 "fieldtype": "wysiwyg",
                                 "width": "",
                                 "height": "",
+                                "phpdocType": "string",
                                 "toolbarConfig": "",
                                 "excludeFromSearchIndex": false,
-                                "maxCharacters": "",
                                 "name": "description",
                                 "title": "Description",
                                 "tooltip": "",
@@ -109,11 +112,11 @@
                                 "width": "",
                                 "height": "",
                                 "maxItems": "",
+                                "phpdocType": "array",
                                 "relationType": true,
                                 "visibleFields": "id",
                                 "allowToCreateNewObject": false,
                                 "optimizedAdminLoading": false,
-                                "enableTextSelection": false,
                                 "visibleFieldDefinitions": [],
                                 "classes": [
                                     {
@@ -137,12 +140,11 @@
                             }
                         ],
                         "locked": false,
-                        "icon": "",
-                        "labelWidth": 0,
-                        "labelAlign": "left"
+                        "icon": ""
                     },
                     {
                         "fieldtype": "panel",
+                        "labelWidth": 100,
                         "layout": null,
                         "border": false,
                         "name": "Questions",
@@ -159,9 +161,10 @@
                         "childs": [
                             {
                                 "fieldtype": "fieldcollections",
+                                "phpdocType": "\\Pimcore\\Model\\DataObject\\Fieldcollection",
                                 "allowedTypes": [
-                                    "MultipleChoise",
-                                    "TextInput"
+                                    "TextInput",
+                                    "MultipleChoise"
                                 ],
                                 "lazyLoading": true,
                                 "maxItems": "",
@@ -187,12 +190,11 @@
                             }
                         ],
                         "locked": false,
-                        "icon": "",
-                        "labelWidth": 0,
-                        "labelAlign": "left"
+                        "icon": ""
                     },
                     {
                         "fieldtype": "panel",
+                        "labelWidth": 100,
                         "layout": null,
                         "border": false,
                         "name": "grades",
@@ -216,12 +218,14 @@
                                 "collapsed": false,
                                 "maxItems": null,
                                 "styleElement": "",
+                                "phpdocType": "\\Pimcore\\Model\\DataObject\\Data\\BlockElement[][]",
                                 "childs": [
                                     {
                                         "fieldtype": "input",
                                         "width": "",
                                         "defaultValue": null,
                                         "columnLength": 190,
+                                        "phpdocType": "string",
                                         "regex": "",
                                         "unique": false,
                                         "showCharCount": false,
@@ -245,6 +249,7 @@
                                         "fieldtype": "numeric",
                                         "width": "",
                                         "defaultValue": 50,
+                                        "phpdocType": "float",
                                         "integer": true,
                                         "unsigned": true,
                                         "minValue": 0,
@@ -272,6 +277,7 @@
                                         "fieldtype": "numeric",
                                         "width": "",
                                         "defaultValue": null,
+                                        "phpdocType": "float",
                                         "integer": true,
                                         "unsigned": true,
                                         "minValue": 1,
@@ -299,6 +305,7 @@
                                         "fieldtype": "numeric",
                                         "width": "",
                                         "defaultValue": null,
+                                        "phpdocType": "float",
                                         "integer": false,
                                         "unsigned": false,
                                         "minValue": null,
@@ -342,25 +349,20 @@
                             }
                         ],
                         "locked": false,
-                        "icon": "",
-                        "labelWidth": 0,
-                        "labelAlign": "left"
+                        "icon": ""
                     }
                 ],
                 "locked": false
             }
         ],
         "locked": false,
-        "icon": null,
-        "labelWidth": 100,
-        "labelAlign": "left"
+        "icon": null
     },
     "icon": "\/bundles\/pimcoreadmin\/img\/flat-color-icons\/file-types.svg",
     "previewUrl": "",
     "group": "LearningManagement",
     "showAppLoggerTab": false,
     "linkGeneratorReference": "",
-    "previewGeneratorReference": "",
     "compositeIndices": [],
     "generateTypeDeclarations": true,
     "showFieldLookup": false,
