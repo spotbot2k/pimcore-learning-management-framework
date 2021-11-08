@@ -1,5 +1,7 @@
 # Pimcore Learning Management Framework
 
+This framework is inspired by [Pimcore Academy](https://pimcore.com/de/developer/academy), [Programming Hub](https://programminghub.io/) and many other resources that provide knowledge to the comunity.
+
 As it is implied by the name this repository does not provide a ready to use solution. It contains baisic tools and classes to implement your own in a short amount of time.
 
 1. [Installation](doc/01_Installation.md)
