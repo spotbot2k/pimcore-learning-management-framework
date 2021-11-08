@@ -115,7 +115,7 @@ class Installer extends SettingsStoreAwareInstaller
      */
     public function installDatabaseTables()
     {
-        Db::get()->query("
+        Db::get()->query('
         CREATE TABLE IF NOT EXISTS `plugin_lmf_student_progress` (
             `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
             `uuid` varchar(64) NOT NULL,
@@ -132,6 +132,6 @@ class Installer extends SettingsStoreAwareInstaller
             KEY `IDX_STUDENTID` (`studentId`),
             KEY `IDX_EXAMID` (`examId`)
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-        ");
+        ');
     }
 }
