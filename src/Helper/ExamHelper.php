@@ -9,6 +9,8 @@
 
 namespace LearningManagementFrameworkBundle\Helper;
 
+use Pimcore\Db;
+use Pimcore\Model\DataObject\Concrete;
 use Pimcore\Model\DataObject\ExamDefinition;
 use Pimcore\Model\DataObject\Fieldcollection\Data\AbstractData;
 use Symfony\Component\Security\Core\Security;
@@ -16,14 +18,20 @@ use Symfony\Component\Security\Core\Security;
 class ExamHelper
 {
     private $user = null;
+    private $attemptResetInterval;
 
-    public function __construct(string $defaultStudentClass, Security $security)
-    {
+    public function __construct(
+        string $defaultStudentClass,
+        int $attemptResetInterval = 0,
+        Security $security
+    ) {
         $user = $security->getUser();
         $class = sprintf("Pimcore\Model\DataObject\%s", $defaultStudentClass);
         if ($user instanceof $class) {
             $this->user = $security->getUser();
         }
+
+        $this->attemptResetInterval = $attemptResetInterval;
     }
 
     public function process(ExamDefinition $exam, array $data): array
@@ -31,6 +39,7 @@ class ExamHelper
         $correctAnswers = 0;
         $incorrectAnswers = [];
         $timeTaken = time() - $data['initts'];
+        $isPassed = false;
         $gradeAchieved = null;
 
         if (array_key_exists('questions', $data)) {
@@ -62,22 +71,28 @@ class ExamHelper
             }
 
             $gradeAchieved = $grade['title']->getData();
+            $isPassed = $grade['unlockCertificate']->getData();
 
             break;
+        }
+
+        // Track user progress if allowed to
+        if (!is_null($this->user) && $exam->getTrackStudentProgress()) {
+            $this->trackProgress($exam, $this->user, $isPassed, $gradeAchieved, $ratio, $timeTaken);
         }
 
         return [
             'correct'   => $correctAnswers,
             'incorrect' => $incorrectAnswers,
             'ratio'     => $ratio,
-            'time'      => time() - $data['initts'],
+            'time'      => $timeTaken,
             'grade'     => $gradeAchieved,
         ];
     }
 
     public function isSudentLoggedIn()
     {
-        return is_null($this->user);
+        return !is_null($this->user);
     }
 
     public function getStudent()
@@ -85,35 +100,24 @@ class ExamHelper
         return $this->user;
     }
 
-    public function buildArray(ExamDefinition $exam)
+    public function getAttemptsCountForCurrentUser(ExamDefinition $exam): ?int
     {
-        $output = [
-            'title'       => $exam->getTitle(),
-            'description' => $exam->getDescription(),
-            'questions'   => [],
-        ];
-
-        foreach ($exam->getQuestions() as $question) {
-            $buffer = [
-                'type'        => $question->getType(),
-                'question'    => $question->getQuestion(),
-                'description' => $question->getDescription(),
-                'answers'     => [],
-            ];
-
-            foreach ($question->getAnswer() as $answer) {
-                $buffer['answers'][] = $answer['Title']->getData();
-            }
-
-            $output['questions'][] = $buffer;
+        if ($this->isSudentLoggedIn()) {
+            return $this->getAttemptsCountForUser($exam, $this->getStudent());
         }
 
-        return $output;
+        return null;
     }
 
-    public function buildJson(ExamDefinition $exam)
+    public function validateCertificateForUser(string $hash, $user)
     {
-        return json_encode($this->buildArray($exam), JSON_THROW_ON_ERROR);
+        $result = Db::get()->fetchRow("
+            SELECT *
+            FROM `plugin_lmf_student_progress`
+                WHERE `uuid` = ? AND `isPassed` = '1'
+            ORDER BY `date` DESC LIMIT 1",
+            [ $hash ]
+        );
     }
 
     private function processQuestion(string $type, AbstractData $question, $submitedValue): bool
@@ -125,5 +129,38 @@ class ExamHelper
         }
 
         return false;
+    }
+
+    private function trackProgress(ExamDefinition $exam, Concrete $user, bool $isPassed, ?string $grade, int $ratio, int $time)
+    {
+        $uuid = $this->getTrackingEntryHash($exam);
+        Db::get()->executeQuery(
+            "INSERT INTO `plugin_lmf_student_progress` (`uuid`, `examId`, `studentId`, `isPassed`, `grade`, `ratio`, `time`) VALUES (?, ?, ?, ?, ?, ?, ?)",
+            [ $uuid, $exam->getId(), $user->getId(), $isPassed, $grade, $ratio, $time ]
+        );
+    }
+
+    private function getAttemptsCountForUser(ExamDefinition $exam, $user): int
+    {
+        $result = Db::get()->fetchOne(
+            "SELECT COUNT(id) cnt FROM
+                `plugin_lmf_student_progress`
+            WHERE
+                `examId` = ?
+                AND `studentId` = ?
+                AND `isPassed` = 0
+                AND TIMESTAMPDIFF(HOUR, date, CURRENT_TIMESTAMP) <= ?"
+        , [
+            $exam->getId(),
+            $user->getId(),
+            $this->attemptResetInterval,
+        ]);
+
+        return $result;
+    }
+
+    private function getTrackingEntryHash(ExamDefinition $exam)
+    {
+        return sprintf("%s-%s-%s", bin2hex(random_bytes(6)), sha1(time()), bin2hex($exam->getId()));
     }
 }

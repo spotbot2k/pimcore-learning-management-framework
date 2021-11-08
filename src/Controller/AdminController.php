@@ -11,27 +11,36 @@ namespace LearningManagementFrameworkBundle\Controller;
 
 use Pimcore\Bundle\AdminBundle\Controller\AdminController as AbstractAdminController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Security;
 
 class AdminController extends AbstractAdminController
 {
     /**
-     * @Route("/admin/lmf/dashboard", name="lmf_admin_dashboard", methods={"POST","GET"})
+     * @Route("/admin/lmf/students", name="lmf_admin_get_students", methods={"POST","GET"})
      */
-    public function dashboard(Request $request, Security $security)
+    public function getStudentList(Request $request)
+    {
+        if ($this->userCanView()) {
+            dd($this->getParameter('pimcore_learning_management_framework.student_name_property'));
+        }
+    }
+
+    /**
+     * @Route("/admin/lmf/progress", name="lmf_admin_get_progress", methods={"GET"})
+     */
+    public function getStudentProgress(Request $request)
+    {
+        return new JsonResponse();
+    }
+
+    protected function userCanView()
     {
         $user = $this->getAdminUser();
-
         if ($user->isAllowed('plugin_lmf_manage') || $user->isAllowed('plugin_lmf_view')) {
-            return $this->render('@PimcoreLearningManagementFramework/admin/dashboard.html.twig', [
-                'user'    => $user,
-                'isAdmin' => $user->isAllowed('plugin_lmf_manage'),
-            ]);
+            return true;
         }
 
-        return $this->render('@PimcoreLearningManagementFramework/admin/denied.html.twig', [
-            'user' => $user,
-        ]);
+        return false;
     }
 }
