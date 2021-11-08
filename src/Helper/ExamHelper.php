@@ -18,7 +18,6 @@ use Symfony\Component\Security\Core\Security;
 class ExamHelper
 {
     private $user = null;
-
     private $attemptResetInterval;
 
     public function __construct(
