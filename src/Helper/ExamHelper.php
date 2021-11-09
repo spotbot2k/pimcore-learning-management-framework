@@ -18,6 +18,7 @@ use Symfony\Component\Security\Core\Security;
 class ExamHelper
 {
     private $user = null;
+
     private $attemptResetInterval;
 
     public function __construct(
@@ -109,9 +110,9 @@ class ExamHelper
         return null;
     }
 
-    public function validateCertificateForUser(string $hash, $user)
+    public function getCertificateByHash(string $hash): ?array
     {
-        $result = Db::get()->fetchRow("
+        return Db::get()->fetchRow("
             SELECT *
             FROM `plugin_lmf_student_progress`
                 WHERE `uuid` = ? AND `isPassed` = '1'
@@ -134,8 +135,9 @@ class ExamHelper
     private function trackProgress(ExamDefinition $exam, Concrete $user, bool $isPassed, ?string $grade, int $ratio, int $time)
     {
         $uuid = $this->getTrackingEntryHash($exam);
-        Db::get()->executeQuery(
-            "INSERT INTO `plugin_lmf_student_progress` (`uuid`, `examId`, `studentId`, `isPassed`, `grade`, `ratio`, `time`) VALUES (?, ?, ?, ?, ?, ?, ?)",
+
+        return Db::get()->executeQuery(
+            'INSERT INTO `plugin_lmf_student_progress` (`uuid`, `examId`, `studentId`, `isPassed`, `grade`, `ratio`, `time`) VALUES (?, ?, ?, ?, ?, ?, ?)',
             [ $uuid, $exam->getId(), $user->getId(), $isPassed, $grade, $ratio, $time ]
         );
     }
@@ -143,14 +145,13 @@ class ExamHelper
     private function getAttemptsCountForUser(ExamDefinition $exam, $user): int
     {
         $result = Db::get()->fetchOne(
-            "SELECT COUNT(id) cnt FROM
+            'SELECT COUNT(id) cnt FROM
                 `plugin_lmf_student_progress`
             WHERE
                 `examId` = ?
                 AND `studentId` = ?
                 AND `isPassed` = 0
-                AND TIMESTAMPDIFF(HOUR, date, CURRENT_TIMESTAMP) <= ?"
-        , [
+                AND TIMESTAMPDIFF(HOUR, date, CURRENT_TIMESTAMP) <= ?', [
             $exam->getId(),
             $user->getId(),
             $this->attemptResetInterval,
@@ -159,8 +160,8 @@ class ExamHelper
         return $result;
     }
 
-    private function getTrackingEntryHash(ExamDefinition $exam)
+    private function getTrackingEntryHash(ExamDefinition $exam): string
     {
-        return sprintf("%s-%s-%s", bin2hex(random_bytes(6)), sha1(time()), bin2hex($exam->getId()));
+        return sprintf('%s-%s-%s', bin2hex(random_bytes(6)), sha1(time()), bin2hex($exam->getId()));
     }
 }

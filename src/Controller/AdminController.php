@@ -11,8 +11,8 @@ namespace LearningManagementFrameworkBundle\Controller;
 
 use Pimcore\Db;
 use Pimcore\Bundle\AdminBundle\Controller\AdminController as AbstractAdminController;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class AdminController extends AbstractAdminController
