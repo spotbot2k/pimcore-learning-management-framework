@@ -18,7 +18,7 @@ pimcore.plugin.learning.management.framework.config = Class.create({
                 border: false,
                 layout: "border",
                 closable: true,
-                items: [ this.getTree() ]
+                items: [ this.getTree(), this.getEditPanel() ]
             });
 
             var tabPanel = Ext.getCmp("pimcore_panel_tabs");
@@ -37,71 +37,38 @@ pimcore.plugin.learning.management.framework.config = Class.create({
 
     getTree: function () {
         if (!this.tree) {
-            var store = Ext.create('Ext.data.TreeStore', {
+            let store = Ext.create('Ext.data.TreeStore', {
                 autoLoad: false,
-                autoSync: true,
+                autoSync: false,
                 proxy: {
                     type: 'ajax',
-                    url: '/admin/pimcoredatahub/config/list',
+                    url: '/admin/lmf/students',
                     reader: {
                         type: 'json'
                     }
-                }
+                },
+                fields: [
+                    'id',
+                    'text',
+                    { name: 'icon', defaultValue: '/bundles/pimcorelearningmanagementframework/img/person_black_24dp.svg' }
+                ]
             });
-
-            let menuItems = [];
-
-            let firstHandler;
-
-            for (var key in pimcore.plugin.datahub.adapter) {
-                if( pimcore.plugin.datahub.adapter.hasOwnProperty( key ) ) {
-
-                    let adapter = new pimcore.plugin.datahub.adapter[key](this);
-
-                    if (!firstHandler) {
-                        firstHandler = adapter.addConfiguration.bind(adapter, key);
-                    }
-                    menuItems.push(
-                    {
-                        text: t('plugin_pimcore_datahub_type_' + key),
-                        iconCls: "plugin_pimcore_datahub_icon_" + key,
-                        handler: adapter.addConfiguration.bind(adapter, key)
-                    });
-                }
-            }
-
-            var addConfigButton = new Ext.SplitButton({
-                text: t("plugin_pimcore_datahub_configpanel_add"),
-                iconCls: "pimcore_icon_add",
-                handler: firstHandler,
-                menu: menuItems
-            });
-
 
             this.tree = new Ext.tree.TreePanel({
                 store: store,
                 region: "west",
-                useArrows: true,
                 autoScroll: true,
                 animate: true,
                 containerScroll: true,
-                border: true,
-                width: 200,
-                split: true,
+                width: 300,
+                title: t("plugin_pimcore_learning_management_framework_config_students"),
                 root: {
                     id: '0',
-                    expanded: true,
-                    iconCls: "pimcore_icon_thumbnails"
+                    expanded: true
                 },
                 rootVisible: false,
-                tbar: {
-                    items: [
-                        addConfigButton
-                    ]
-                },
                 listeners: {
                     itemclick: this.onTreeNodeClick.bind(this),
-                    itemcontextmenu: this.onTreeNodeContextmenu.bind(this),
                     render: function () {
                         this.getRootNode().expand()
                     }
@@ -110,5 +77,47 @@ pimcore.plugin.learning.management.framework.config = Class.create({
         }
 
         return this.tree;
+    },
+
+    onTreeNodeClick: function (tree, record, item, index, e, eOpts) {
+        let store = Ext.create('Ext.data.TreeStore', {
+            autoLoad: true,
+            autoSync: false,
+            proxy: {
+                type: 'ajax',
+                url: '/admin/lmf/student/' + record.data.id,
+                reader: {
+                    type: 'json'
+                }
+            }
+        });
+        let tab = new Ext.TabPanel({
+            store: store,
+            activeTab: 0,
+            title: record.data.text,
+            icon: '/bundles/pimcorelearningmanagementframework/img/person_black_24dp.svg',
+            closable: true,
+            deferredRender: false,
+            forceLayout: true,
+            buttons: {
+                componentCls: 'plugin_pimcore_datahub_statusbar',
+                itemId: 'footer'
+            },
+        });
+        tab.setActiveTab(0);
+
+        this.editPanel.add(tab);
+        this.editPanel.setActiveTab(tab);
+        this.editPanel.updateLayout();
+    },
+
+    getEditPanel: function () {
+        if (!this.editPanel) {
+            this.editPanel = new Ext.TabPanel({
+                region: "center"
+            });
+        }
+
+        return this.editPanel;
     },
 });
