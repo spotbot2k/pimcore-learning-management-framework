@@ -115,7 +115,7 @@ class ExamHelper
         return Db::get()->fetchRow("
             SELECT *
             FROM `plugin_lmf_student_progress`
-                WHERE `uuid` = ? AND `isPassed` = '1'
+                WHERE `uuid` = ? AND `isPassed` = 1 and `isActive` = 1
             ORDER BY `date` DESC LIMIT 1",
             [ $hash ]
         );
@@ -151,6 +151,7 @@ class ExamHelper
                 `examId` = ?
                 AND `studentId` = ?
                 AND `isPassed` = 0
+                AND `isActive` = 1
                 AND TIMESTAMPDIFF(HOUR, date, CURRENT_TIMESTAMP) <= ?', [
             $exam->getId(),
             $user->getId(),

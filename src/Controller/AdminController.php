@@ -47,14 +47,18 @@ class AdminController extends AbstractAdminController
         if ($this->userCanView()) {
             $sql = "
                 SELECT
-                    `examId` examId,
-                    COUNT(id) attempts,
-                    DATE_FORMAT(date, '%d.%m.%Y') lastAttempt,
-                    MAX(`isPassed`) passed,
-                    MIN(time) bestTime,
-                    MAX(ratio) bestRatio
-                FROM `plugin_lmf_student_progress`
-                    WHERE `studentId` = ?
+                    lmf.`examId` examId,
+                    e.title,
+                    COUNT(lmf.id) attempts,
+                    DATE_FORMAT(lmf.date, '%d.%m.%Y') lastAttempt,
+                    MAX(lmf.`isPassed`) passed,
+                    MIN(lmf.time) bestTime,
+                    MAX(lmf.ratio) bestRatio,
+                    (SELECT grade FROM `plugin_lmf_student_progress` WHERE `grade` IS NOT NULL ORDER BY `date` LIMIT 1) latestGrade
+                FROM `plugin_lmf_student_progress` lmf
+                LEFT JOIN `object_store_LMF_ED` e
+                    ON e.oo_id = lmf.examId
+                WHERE `studentId` = ?
                 ORDER BY date
             ";
 
