@@ -54,6 +54,15 @@ pimcore.plugin.learning.management.framework.config = Class.create({
                 ]
             });
 
+            let refreshViewButton = new Ext.SplitButton({
+                text: t('plugin_pimcore_learning_management_framework_action_reload'),
+                iconCls: "pimcore_icon_reload",
+                handler: function() {
+                    this.tree.store.getRootNode().removeAll();
+                    this.tree.store.load();
+                }.bind(this)
+            });
+
             this.tree = new Ext.tree.TreePanel({
                 store: store,
                 region: 'west',
@@ -69,14 +78,32 @@ pimcore.plugin.learning.management.framework.config = Class.create({
                 rootVisible: false,
                 listeners: {
                     itemclick: this.onTreeNodeClick.bind(this),
+                    itemcontextmenu: this.onStudentContextmenu.bind(this),
                     render: function () {
                         this.getRootNode().expand()
                     }
-                }
+                },
+                tbar: {
+                    items: [
+                        refreshViewButton
+                    ]
+                },
             });
         }
 
+        window.tree = this.tree;
+
         return this.tree;
+    },
+
+    getEditPanel: function () {
+        if (!this.editPanel) {
+            this.editPanel = new Ext.TabPanel({
+                region: 'center'
+            });
+        }
+
+        return this.editPanel;
     },
 
     onTreeNodeClick: function (tree, record, item, index, e, eOpts) {
@@ -99,6 +126,9 @@ pimcore.plugin.learning.management.framework.config = Class.create({
             trackMouseOver: true,
             columnLines: true,
             store: store,
+            listeners: {
+                itemcontextmenu: this.onExamRowContextmenu.bind(this),
+            },
             columns: [
                 { text: t('plugin_pimcore_learning_management_framework_column_examTitle'), dataIndex: 'title' },
                 { text: t('plugin_pimcore_learning_management_framework_column_attempts'), dataIndex: 'attempts' },
@@ -106,20 +136,7 @@ pimcore.plugin.learning.management.framework.config = Class.create({
                 { text: t('plugin_pimcore_learning_management_framework_column_passed'), dataIndex: 'passed' },
                 { text: t('plugin_pimcore_learning_management_framework_column_bestTime'), dataIndex: 'bestTime' },
                 { text: t('plugin_pimcore_learning_management_framework_column_bestRatio'), dataIndex: 'bestRatio' },
-                { text: t('plugin_pimcore_learning_management_framework_column_latestGrade'), dataIndex: 'latestGrade' },
-                // {
-                //     align: 'center',
-                //     xtype: 'actioncolumn',
-                //     items: [
-                //         {
-                //            xtype: 'button',
-                //            tooltip: t('plugin_pimcore_learning_management_framework_action_revoke'),
-                //            icon: '/bundles/pimcoreadmin/img/flat-color-icons/overlay-delete.svg',
-                //            handler: function() {
-                //            }
-                //         }
-                //     ]
-                // }
+                { text: t('plugin_pimcore_learning_management_framework_column_latestGrade'), dataIndex: 'latestGrade' }
             ]
         });
         let tab = new Ext.Panel({
@@ -139,13 +156,35 @@ pimcore.plugin.learning.management.framework.config = Class.create({
         this.editPanel.updateLayout();
     },
 
-    getEditPanel: function () {
-        if (!this.editPanel) {
-            this.editPanel = new Ext.TabPanel({
-                region: 'center'
-            });
-        }
+    onExamRowContextmenu: function (grid, record, item, index, e, eOpts) {
+        e.stopEvent();
+        grid.select();
 
-        return this.editPanel;
+        let menu = new Ext.menu.Menu();
+        menu.add(new Ext.menu.Item({
+            text: t('plugin_pimcore_learning_management_framework_action_open_exam'),
+            iconCls: 'pimcore_icon_open',
+            handler: function (grid, record) {
+                pimcore.helpers.openObject(record.data.examId, 'object');
+            }.bind(this, grid, record)
+        }));
+
+        menu.showAt(e.pageX, e.pageY);
     },
+
+    onStudentContextmenu: function (tree, record, item, index, e, eOpts) {
+        e.stopEvent();
+        tree.select();
+
+        let menu = new Ext.menu.Menu();
+        menu.add(new Ext.menu.Item({
+            text: t('plugin_pimcore_learning_management_framework_action_open_student'),
+            iconCls: 'pimcore_icon_open',
+            handler: function (tree, record) {
+                pimcore.helpers.openObject(record.data.id, 'object');
+            }.bind(this, tree, record)
+        }));
+
+        menu.showAt(e.pageX, e.pageY);
+    }
 });
