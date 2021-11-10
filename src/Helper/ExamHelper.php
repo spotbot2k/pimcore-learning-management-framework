@@ -112,11 +112,11 @@ class ExamHelper
 
     public function getCertificateByHash(string $hash): ?array
     {
-        return Db::get()->fetchRow("
+        return Db::get()->fetchRow('
             SELECT *
             FROM `plugin_lmf_student_progress`
                 WHERE `uuid` = ? AND `isPassed` = 1 and `isActive` = 1
-            ORDER BY `date` DESC LIMIT 1",
+            ORDER BY `date` DESC LIMIT 1',
             [ $hash ]
         );
     }
