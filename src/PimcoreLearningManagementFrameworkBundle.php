@@ -25,18 +25,11 @@ class PimcoreLearningManagementFrameworkBundle extends AbstractPimcoreBundle
     /**
      * {@inheritdoc}
      */
-    public function getAdminIframePath()
-    {
-        return '/admin/lmf/dashboard';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getJsPaths()
     {
         return [
             '/bundles/pimcorelearningmanagementframework/js/startup.js',
+            '/bundles/pimcorelearningmanagementframework/js/config.js',
         ];
     }
 

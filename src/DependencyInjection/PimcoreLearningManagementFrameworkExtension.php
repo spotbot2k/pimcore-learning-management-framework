@@ -21,15 +21,14 @@ class PimcoreLearningManagementFrameworkExtension extends Extension
      */
     public function load(array $configs, ContainerBuilder $container)
     {
-        $loader = new YamlFileLoader(
-            $container,
-            new FileLocator(__DIR__ . '/../Resources/config')
-        );
+        $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
 
-        $loader->load('services.yaml');
+        $loader->load('services.yml');
 
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
         $container->setParameter('pimcore_learning_management_framework.student_class', $config['student_class']);
+        $container->setParameter('pimcore_learning_management_framework.student_name_property', $config['student_name_property']);
+        $container->setParameter('pimcore_learning_management_framework.attempt_reset_period', $config['attempt_reset_period']);
     }
 }

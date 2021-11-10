@@ -19,10 +19,11 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder('pimcore_learning_management_framework');
         $treeBuilder->getRootNode()
             ->children()
-                ->scalarNode('student_class')
-                ->defaultValue('Student')
+                ->scalarNode('student_class')->info('Must be a Pimcore data object')->defaultValue('Student')->end()
+                ->scalarNode('student_name_property')->info('In lowercase, as it will be used in the SQL query')->defaultValue('email')->end()
+                ->integerNode('attempt_reset_period')->info('Time in hours to be passed before an attempt resets')->min(0)->defaultValue('168')->end()
             ->end()
-        ;
+        ->end();
 
         return $treeBuilder;
     }

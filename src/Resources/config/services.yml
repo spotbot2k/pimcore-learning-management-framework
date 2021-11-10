@@ -6,7 +6,6 @@ services:
 
   LearningManagementFrameworkBundle\Controller\:
     resource: '../../Controller'
-    public: true
     tags: ['controller.service_arguments']
 
   LearningManagementFrameworkBundle\Tools\Installer:
@@ -17,3 +16,4 @@ services:
   LearningManagementFrameworkBundle\Helper\ExamHelper:
     arguments:
       $defaultStudentClass: '%pimcore_learning_management_framework.student_class%'
+      $attemptResetInterval: '%pimcore_learning_management_framework.attempt_reset_period%'
