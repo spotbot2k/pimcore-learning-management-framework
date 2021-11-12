@@ -13,10 +13,10 @@ use Pimcore\Db;
 use Pimcore\Extension\Bundle\Installer\Exception\InstallationException;
 use Pimcore\Extension\Bundle\Installer\SettingsStoreAwareInstaller;
 use Pimcore\Logger;
-use Pimcore\Model\Translation;
 use Pimcore\Model\DataObject\ClassDefinition;
 use Pimcore\Model\DataObject\ClassDefinition\Service;
 use Pimcore\Model\DataObject\Fieldcollection;
+use Pimcore\Model\Translation;
 
 class Installer extends SettingsStoreAwareInstaller
 {
