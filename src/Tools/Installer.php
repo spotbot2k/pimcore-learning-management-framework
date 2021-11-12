@@ -13,6 +13,7 @@ use Pimcore\Db;
 use Pimcore\Extension\Bundle\Installer\Exception\InstallationException;
 use Pimcore\Extension\Bundle\Installer\SettingsStoreAwareInstaller;
 use Pimcore\Logger;
+use Pimcore\Model\Translation;
 use Pimcore\Model\DataObject\ClassDefinition;
 use Pimcore\Model\DataObject\ClassDefinition\Service;
 use Pimcore\Model\DataObject\Fieldcollection;
@@ -38,6 +39,7 @@ class Installer extends SettingsStoreAwareInstaller
         $this->installFieldCollections();
         $this->installPermissions();
         $this->installDatabaseTables();
+        $this->installTranslations();
 
         parent::install();
 
@@ -133,5 +135,10 @@ class Installer extends SettingsStoreAwareInstaller
             KEY `IDX_EXAMID` (`examId`)
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
         ');
+    }
+
+    private function installTranslations()
+    {
+        Translation::importTranslationsFromFile(__DIR__.'/../Resources/install/translations/export_admin_translations.csv', Translation::DOMAIN_ADMIN);
     }
 }
