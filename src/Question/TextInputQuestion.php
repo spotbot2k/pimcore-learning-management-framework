@@ -24,7 +24,7 @@ class TextInputQuestion implements QuestionInterface
             'help_html'  => true,
             'empty_data' => null,
             'attr'       => [
-                'autocomplete' => 'off'
+                'autocomplete' => 'off',
             ],
         ]);
     }
