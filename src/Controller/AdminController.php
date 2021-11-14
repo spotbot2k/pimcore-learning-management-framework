@@ -80,7 +80,7 @@ class AdminController extends AbstractAdminController
         Db::get()->executeQuery('
             UPDATE `plugin_lmf_student_progress`
             SET `isActive` = 0
-            WHERE `examId` = ? AND `studentId` = ?
+            WHERE `examId` = ? AND `studentId` = ? AND `isPassed` = 0
         ', [
             $request->get('examId'),
             $request->get('studentId'),

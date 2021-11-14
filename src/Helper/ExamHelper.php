@@ -14,6 +14,7 @@ use Pimcore\Model\DataObject\Concrete;
 use Pimcore\Model\DataObject\ExamDefinition;
 use Pimcore\Model\DataObject\Fieldcollection\Data\AbstractData;
 use Symfony\Component\Security\Core\Security;
+use LearningManagementFrameworkBundle\Result\RejectionResult;
 
 class ExamHelper
 {
@@ -104,10 +105,61 @@ class ExamHelper
     public function getAttemptsCountForCurrentUser(ExamDefinition $exam): ?int
     {
         if ($this->isSudentLoggedIn()) {
-            return $this->getAttemptsCountForUser($exam, $this->getStudent());
+            return $this->getAttemptsCountForUser($exam, $this->user);
         }
 
         return null;
+    }
+
+    public function canAttend(ExamDefinition $exam): RejectionResult
+    {
+        if ($this->user) {
+            if ($exam->getMaxAttempts() && $this->getAttemptsCountForUser($exam, $this->user) > $exam->getMaxAttempts()) {
+                return new RejectionResult(RejectionResult::OUT_OF_ATTEMPTS);
+            }
+
+            $prerequisites = $exam->getPrerequisites();
+            $unfulfilledPrerequisites = [];
+
+            foreach ($prerequisites as $prerequisite) {
+                if (!$this->userHasPassed($prerequisite, $this->user)) {
+                    $unfulfilledPrerequisites[] = [
+                        "id" => $prerequisite->getId(),
+                        "title" => $prerequisite->getTitle(),
+                    ];
+                }
+            }
+
+            if (!empty($unfulfilledPrerequisites)) {
+                $result = new RejectionResult(RejectionResult::UNFULFILLED_PREREQUISITE);
+
+                return $result->setUnfulfilledPrerequisites($unfulfilledPrerequisites);
+            }
+        } elseif (!$exam->getAllowAnonymous()) {
+            return new RejectionResult(RejectionResult::NOT_LOGGED_IN);
+        }
+
+        return new RejectionResult(RejectionResult::NOT_REJECTED);
+    }
+
+    public function hasPassed(ExamDefinition $exam): bool
+    {
+        if ($this->isSudentLoggedIn()) {
+            return $this->userHasPassed($exam, $this->user);
+        }
+
+        return false;
+    }
+
+    public function userHasPassed(ExamDefinition $exam, $user)
+    {
+        $result = Db::get()->fetchRow('
+            SELECT count(`id`)
+                FROM `plugin_lmf_student_progress`
+            WHERE `examId` = ? AND `studentId` = ? AND `isPassed` = 1 AND `isActive` = 1
+            LIMIT 1',
+            [ $exam->getId(), $user->getId() ]
+        );
     }
 
     public function getCertificateByHash(string $hash): ?array
