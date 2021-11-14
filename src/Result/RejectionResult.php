@@ -19,7 +19,12 @@ class RejectionResult
 
     public function isRejected()
     {
-        return is_null($this->reason);
+        return !is_null($this->reason);
+    }
+
+    public function getReason()
+    {
+        return $this->reason;
     }
 
     public function getUnfulfilledPrerequisites()

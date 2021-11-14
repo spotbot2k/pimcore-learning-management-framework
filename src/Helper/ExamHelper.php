@@ -111,10 +111,12 @@ class ExamHelper
         return null;
     }
 
-    public function canAttend(ExamDefinition $exam): RejectionResult
+    public function canAttend(ExamDefinition $exam, $user = null): RejectionResult
     {
-        if ($this->user) {
-            if ($exam->getMaxAttempts() && $this->getAttemptsCountForUser($exam, $this->user) > $exam->getMaxAttempts()) {
+        $user = $user ?: $this->user;
+
+        if ($user) {
+            if ($exam->getMaxAttempts() && $this->getAttemptsCountForUser($exam, $user) >= $exam->getMaxAttempts()) {
                 return new RejectionResult(RejectionResult::OUT_OF_ATTEMPTS);
             }
 
@@ -122,7 +124,7 @@ class ExamHelper
             $unfulfilledPrerequisites = [];
 
             foreach ($prerequisites as $prerequisite) {
-                if (!$this->userHasPassed($prerequisite, $this->user)) {
+                if (!$this->userHasPassed($prerequisite, $user)) {
                     $unfulfilledPrerequisites[] = [
                         "id" => $prerequisite->getId(),
                         "title" => $prerequisite->getTitle(),
@@ -151,7 +153,7 @@ class ExamHelper
         return false;
     }
 
-    public function userHasPassed(ExamDefinition $exam, $user)
+    public function userHasPassed(ExamDefinition $exam, $user): bool
     {
         $result = Db::get()->fetchRow('
             SELECT count(`id`)
@@ -160,6 +162,8 @@ class ExamHelper
             LIMIT 1',
             [ $exam->getId(), $user->getId() ]
         );
+
+        return ($result > 0);
     }
 
     public function getCertificateByHash(string $hash): ?array
