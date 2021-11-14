@@ -32,6 +32,7 @@
 "plugin_pimcore_learning_management_framework_ed_prerequisites";"";"Voraussetzung";"Prerequisites";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";""
 "plugin_pimcore_learning_management_framework_ed_unlocks_certificate";"";"Erzeugt einen Zertifikat";"Unlocks Certificate";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";""
 "plugin_pimcore_learning_management_framework_ed_allow_anonymous";"";"Anonyme Teilnahme erlauben";"Allow Anonymous Attendance";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";""
+"plugin_pimcore_learning_management_framework_ed_max_attends";"";"Maximale Versuche";"Max Attempts";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";""
 "plugin_pimcore_learning_management_framework_fd_answer";"";"Antwort";"Answer";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";""
 "plugin_pimcore_learning_management_framework_fd_description";"";"Beschreibung";"Description";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";""
 "plugin_pimcore_learning_management_framework_fd_detail";"";"Einstellungen";"Detail";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";""
