@@ -163,7 +163,7 @@ class ExamHelper
             [ $exam->getId(), $user->getId() ]
         );
 
-        return ($result > 0);
+        return $result > 0;
     }
 
     public function getCertificateByHash(string $hash): ?array
