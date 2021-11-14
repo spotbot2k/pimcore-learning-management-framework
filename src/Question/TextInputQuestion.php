@@ -23,6 +23,9 @@ class TextInputQuestion implements QuestionInterface
             'help'       => $event->getData()->getDescription(),
             'help_html'  => true,
             'empty_data' => null,
+            'attr'       => [
+                'autocomplete' => 'off'
+            ],
         ]);
     }
 
@@ -31,6 +34,7 @@ class TextInputQuestion implements QuestionInterface
         $correctAnswer = $question->getAnswer();
         if ($question->getLowercaseComparsion()) {
             $correctAnswer = strtolower($correctAnswer);
+            $submitedValue = strtolower($submitedValue);
         }
 
         return $correctAnswer === $submitedValue;
