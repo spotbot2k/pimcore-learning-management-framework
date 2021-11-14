@@ -9,12 +9,12 @@
 
 namespace LearningManagementFrameworkBundle\Helper;
 
+use LearningManagementFrameworkBundle\Result\RejectionResult;
 use Pimcore\Db;
 use Pimcore\Model\DataObject\Concrete;
 use Pimcore\Model\DataObject\ExamDefinition;
 use Pimcore\Model\DataObject\Fieldcollection\Data\AbstractData;
 use Symfony\Component\Security\Core\Security;
-use LearningManagementFrameworkBundle\Result\RejectionResult;
 
 class ExamHelper
 {
@@ -124,8 +124,8 @@ class ExamHelper
             foreach ($prerequisites as $prerequisite) {
                 if (!$this->userHasPassed($prerequisite, $this->user)) {
                     $unfulfilledPrerequisites[] = [
-                        "id" => $prerequisite->getId(),
-                        "title" => $prerequisite->getTitle(),
+                        'id' => $prerequisite->getId(),
+                        'title' => $prerequisite->getTitle(),
                     ];
                 }
             }
