@@ -1,15 +1,26 @@
 <?php
 
+/**
+ * This file is part of the Pimcore Learning Management Framework
+ * Docs and updates: https://github.com/spotbot2k/pimcore-learning-management-framework
+ *
+ *  @license GPLv3
+ */
+
 namespace LearningManagementFrameworkBundle\Result;
 
 class RejectionResult
 {
     public const NOT_REJECTED = null;
+
     public const NOT_LOGGED_IN = 0;
+
     public const OUT_OF_ATTEMPTS = 1;
+
     public const UNFULFILLED_PREREQUISITE = 2;
 
     private ?int $reason;
+
     private array $unfulfilledPrerequisites;
 
     public function __construct(?int $reason = null)
