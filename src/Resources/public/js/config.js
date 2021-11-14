@@ -9,32 +9,6 @@ pimcore.plugin.learning.management.framework.config = Class.create({
         tabPanel.setActiveItem(this.getTabPanel());
     },
 
-    getTabPanel: function () {
-        if (!this.panel) {
-            this.panel = new Ext.Panel({
-                id: 'plugin_pimcore_learning_management_framework_config_tab',
-                title: t('plugin_pimcore_learning_management_framework_config_toolbar'),
-                icon: '/bundles/pimcorelearningmanagementframework/img/school_white_24dp.svg',
-                border: false,
-                layout: 'border',
-                closable: true,
-                items: [ this.getTree(), this.getEditPanel() ]
-            });
-
-            var tabPanel = Ext.getCmp('pimcore_panel_tabs');
-            tabPanel.add(this.panel);
-            tabPanel.setActiveItem('plugin_pimcore_learning_management_framework_config_tab');
-
-            this.panel.on('destroy', function () {
-                pimcore.globalmanager.remove('plugin_pimcore_learning_management_framework_config');
-            }.bind(this));
-
-            pimcore.layout.refresh();
-        }
-
-        return this.panel;
-    },
-
     getTree: function () {
         if (!this.tree) {
             let store = Ext.create('Ext.data.TreeStore', {
@@ -43,9 +17,7 @@ pimcore.plugin.learning.management.framework.config = Class.create({
                 proxy: {
                     type: 'ajax',
                     url: '/admin/lmf/students',
-                    reader: {
-                        type: 'json'
-                    }
+                    reader: {  type: 'json' }
                 },
                 fields: [
                     'id',
@@ -54,7 +26,7 @@ pimcore.plugin.learning.management.framework.config = Class.create({
                 ]
             });
 
-            let refreshViewButton = new Ext.SplitButton({
+            let refreshTreeButton = new Ext.Button({
                 text: t('plugin_pimcore_learning_management_framework_action_reload'),
                 iconCls: "pimcore_icon_reload",
                 handler: function() {
@@ -83,11 +55,7 @@ pimcore.plugin.learning.management.framework.config = Class.create({
                         this.getRootNode().expand()
                     }
                 },
-                tbar: {
-                    items: [
-                        refreshViewButton
-                    ]
-                },
+                bbar: [ refreshTreeButton ]
             });
         }
 
@@ -106,6 +74,35 @@ pimcore.plugin.learning.management.framework.config = Class.create({
         return this.editPanel;
     },
 
+    getTabPanel: function () {
+        if (!this.panel) {
+            this.panel = new Ext.Panel({
+                id: 'plugin_pimcore_learning_management_framework_config_tab',
+                title: t('plugin_pimcore_learning_management_framework_config_toolbar'),
+                icon: '/bundles/pimcorelearningmanagementframework/img/school_white_24dp.svg',
+                border: false,
+                layout: 'border',
+                closable: true,
+                items: [
+                    this.getTree(),
+                    this.getEditPanel()
+                ]
+            });
+
+            let tabPanel = Ext.getCmp('pimcore_panel_tabs');
+            tabPanel.add(this.panel);
+            tabPanel.setActiveItem('plugin_pimcore_learning_management_framework_config_tab');
+
+            this.panel.on('destroy', function () {
+                pimcore.globalmanager.remove('plugin_pimcore_learning_management_framework_config');
+            }.bind(this));
+
+            pimcore.layout.refresh();
+        }
+
+        return this.panel;
+    },
+
     onTreeNodeClick: function (tree, record, item, index, e, eOpts) {
         let store = Ext.create('Ext.data.Store', {
             autoLoad: true,
@@ -117,6 +114,13 @@ pimcore.plugin.learning.management.framework.config = Class.create({
                     type: 'json'
                 }
             }
+        });
+        let refreshTabButton = new Ext.Button({
+            text: t('plugin_pimcore_learning_management_framework_action_reload'),
+            iconCls: "pimcore_icon_reload",
+            handler: function(store) {
+                store.reload();
+            }.bind(this, store)
         });
         let grid = new Ext.grid.Panel({
             frame: false,
@@ -137,7 +141,8 @@ pimcore.plugin.learning.management.framework.config = Class.create({
                 { text: t('plugin_pimcore_learning_management_framework_column_bestTime'), dataIndex: 'bestTime' },
                 { text: t('plugin_pimcore_learning_management_framework_column_bestRatio'), dataIndex: 'bestRatio' },
                 { text: t('plugin_pimcore_learning_management_framework_column_latestGrade'), dataIndex: 'latestGrade' }
-            ]
+            ],
+            tbar: [ refreshTabButton ]
         });
         let tab = new Ext.Panel({
             title: record.data.text,
