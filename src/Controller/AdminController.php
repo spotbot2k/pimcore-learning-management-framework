@@ -11,8 +11,8 @@ namespace LearningManagementFrameworkBundle\Controller;
 
 use Pimcore\Bundle\AdminBundle\Controller\AdminController as AbstractAdminController;
 use Pimcore\Db;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class AdminController extends AbstractAdminController
@@ -77,13 +77,13 @@ class AdminController extends AbstractAdminController
      */
     public function resetExamAttemptsForStudent(Request $request)
     {
-        Db::get()->executeQuery("
+        Db::get()->executeQuery('
             UPDATE `plugin_lmf_student_progress`
             SET `isActive` = 0
             WHERE `examId` = ? AND `studentId` = ?
-        ", [
-            $request->get("examId"),
-            $request->get("studentId"),
+        ', [
+            $request->get('examId'),
+            $request->get('studentId'),
         ]);
 
         return new JsonResponse();
