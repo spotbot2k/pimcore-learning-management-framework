@@ -150,7 +150,6 @@ class ExamHelper
             WHERE
                 `examId` = ?
                 AND `studentId` = ?
-                AND `isPassed` = 0
                 AND `isActive` = 1
                 AND TIMESTAMPDIFF(HOUR, date, CURRENT_TIMESTAMP) <= ?', [
             $exam->getId(),

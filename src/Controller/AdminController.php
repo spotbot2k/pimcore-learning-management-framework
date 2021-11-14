@@ -11,6 +11,7 @@ namespace LearningManagementFrameworkBundle\Controller;
 
 use Pimcore\Bundle\AdminBundle\Controller\AdminController as AbstractAdminController;
 use Pimcore\Db;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -47,8 +48,10 @@ class AdminController extends AbstractAdminController
             $sql = "
                 SELECT
                     lmf.`examId` examId,
+                    lmf.`studentId` studentId,
                     e.title,
-                    COUNT(lmf.id) attempts,
+                    COUNT(lmf.`id`) attemptsTotal,
+                    SUM(lmf.`isActive`) attemptsActive,
                     DATE_FORMAT(lmf.date, '%d.%m.%Y') lastAttempt,
                     MAX(lmf.`isPassed`) passed,
                     MIN(lmf.time) bestTime,
@@ -57,7 +60,7 @@ class AdminController extends AbstractAdminController
                 FROM `plugin_lmf_student_progress` lmf
                 LEFT JOIN `object_store_LMF_ED` e
                     ON e.oo_id = lmf.examId
-                WHERE `studentId` = ?
+                WHERE lmf.`studentId` = ?
                 ORDER BY date
             ";
 
@@ -65,6 +68,23 @@ class AdminController extends AbstractAdminController
 
             return new JsonResponse($result);
         }
+
+        return new JsonResponse();
+    }
+
+    /**
+     * @Route("/admin/lmf/exam/reset-attempts", name="lmf_admin_post_exam_reset_attempts", methods={"POST"})
+     */
+    public function resetExamAttemptsForStudent(Request $request)
+    {
+        Db::get()->executeQuery("
+            UPDATE `plugin_lmf_student_progress`
+            SET `isActive` = 0
+            WHERE `examId` = ? AND `studentId` = ?
+        ", [
+            $request->get("examId"),
+            $request->get("studentId"),
+        ]);
 
         return new JsonResponse();
     }

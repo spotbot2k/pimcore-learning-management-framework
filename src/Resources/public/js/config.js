@@ -115,8 +115,13 @@ pimcore.plugin.learning.management.framework.config = Class.create({
                 }
             }
         });
+        let openExamButton = new Ext.Button({
+            iconCls: "pimcore_icon_open",
+            handler: function(record) {
+                pimcore.helpers.openObject(record.data.id, 'object');
+            }.bind(this, record)
+        });
         let refreshTabButton = new Ext.Button({
-            text: t('plugin_pimcore_learning_management_framework_action_reload'),
             iconCls: "pimcore_icon_reload",
             handler: function(store) {
                 store.reload();
@@ -135,14 +140,15 @@ pimcore.plugin.learning.management.framework.config = Class.create({
             },
             columns: [
                 { text: t('plugin_pimcore_learning_management_framework_column_examTitle'), dataIndex: 'title' },
-                { text: t('plugin_pimcore_learning_management_framework_column_attempts'), dataIndex: 'attempts' },
+                { text: t('plugin_pimcore_learning_management_framework_column_attempts_active'), dataIndex: 'attemptsActive' },
+                { text: t('plugin_pimcore_learning_management_framework_column_attempts_total'), dataIndex: 'attemptsTotal' },
                 { text: t('plugin_pimcore_learning_management_framework_column_lastAttempt'), dataIndex: 'lastAttempt' },
                 { text: t('plugin_pimcore_learning_management_framework_column_passed'), dataIndex: 'passed' },
                 { text: t('plugin_pimcore_learning_management_framework_column_bestTime'), dataIndex: 'bestTime' },
                 { text: t('plugin_pimcore_learning_management_framework_column_bestRatio'), dataIndex: 'bestRatio' },
                 { text: t('plugin_pimcore_learning_management_framework_column_latestGrade'), dataIndex: 'latestGrade' }
             ],
-            tbar: [ refreshTabButton ]
+            tbar: [ openExamButton, refreshTabButton ]
         });
         let tab = new Ext.Panel({
             title: record.data.text,
@@ -166,11 +172,29 @@ pimcore.plugin.learning.management.framework.config = Class.create({
         grid.select();
 
         let menu = new Ext.menu.Menu();
+
         menu.add(new Ext.menu.Item({
             text: t('plugin_pimcore_learning_management_framework_action_open_exam'),
             iconCls: 'pimcore_icon_open',
             handler: function (grid, record) {
                 pimcore.helpers.openObject(record.data.examId, 'object');
+            }.bind(this, grid, record)
+        }));
+        menu.add(new Ext.menu.Item({
+            text: t('plugin_pimcore_learning_management_framework_action_reset_attempts'),
+            iconCls: 'pimcore_icon_unpublish',
+            handler: function (grid, record) {
+                Ext.Ajax.request({
+                    url: "/admin/lmf/exam/reset-attempts",
+                    method: 'POST',
+                    params: {
+                        examId: record.data.examId,
+                        studentId: record.data.studentId
+                    },
+                    success: function (response) {
+                        grid.store.reload();
+                    }.bind(this)
+                });
             }.bind(this, grid, record)
         }));
 
