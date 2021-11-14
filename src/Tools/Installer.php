@@ -112,9 +112,6 @@ class Installer extends SettingsStoreAwareInstaller
         }
     }
 
-    /**
-     * @todo: create table where the progress will be storred
-     */
     public function installDatabaseTables()
     {
         Db::get()->query('
