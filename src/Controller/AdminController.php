@@ -41,6 +41,7 @@ class AdminController extends AbstractAdminController
 
     /**
      * @Route("/admin/lmf/student/{id}", name="lmf_admin_get_student_progress", methods={"POST","GET"})
+     *
      * @todo - read current active with timestamp
      */
     public function getStudentProgress(int $id)
