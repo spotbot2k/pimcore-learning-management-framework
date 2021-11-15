@@ -197,6 +197,23 @@ pimcore.plugin.learning.management.framework.config = Class.create({
                 });
             }.bind(this, grid, record)
         }));
+        menu.add(new Ext.menu.Item({
+            text: t('plugin_pimcore_learning_management_framework_action_reset_grades'),
+            iconCls: 'pimcore_icon_delete',
+            handler: function (grid, record) {
+                Ext.Ajax.request({
+                    url: "/admin/lmf/exam/reset-grades",
+                    method: 'POST',
+                    params: {
+                        examId: record.data.examId,
+                        studentId: record.data.studentId
+                    },
+                    success: function (response) {
+                        grid.store.reload();
+                    }.bind(this)
+                });
+            }.bind(this, grid, record)
+        }));
 
         menu.showAt(e.pageX, e.pageY);
     },

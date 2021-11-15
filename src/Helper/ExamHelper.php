@@ -137,6 +137,10 @@ class ExamHelper
 
                 return $result->setUnfulfilledPrerequisites($unfulfilledPrerequisites);
             }
+
+            if (!$exam->getAllowGradeUpdate() && $this->userHasPassed($exam, $user)) {
+                return new RejectionResult(RejectionResult::ALLREADY_PASSED);
+            }
         } elseif (!$exam->getAllowAnonymous()) {
             return new RejectionResult(RejectionResult::NOT_LOGGED_IN);
         }
@@ -156,14 +160,14 @@ class ExamHelper
     public function userHasPassed(ExamDefinition $exam, $user): bool
     {
         $result = Db::get()->fetchRow('
-            SELECT count(`id`)
+            SELECT count(`id`) cnt
                 FROM `plugin_lmf_student_progress`
             WHERE `examId` = ? AND `studentId` = ? AND `isPassed` = 1 AND `isActive` = 1
             LIMIT 1',
             [ $exam->getId(), $user->getId() ]
         );
 
-        return $result > 0;
+        return $result["cnt"] > 0;
     }
 
     public function getCertificateByHash(string $hash): ?array

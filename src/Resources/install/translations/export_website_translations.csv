@@ -1,0 +1,5 @@
+"key";"de";"en"
+"lmf_rejection_reason_already_passed";"Bereits bestanden";"Already passed"
+"lmf_rejection_reason_not_logged_in";"Nicht eingeloggt";"Not logged in"
+"lmf_rejection_reason_out_of_attempts";"Sie haben zu oft versucht bitte später probieren";"You failed too often, please wait a bit to try again"
+"lmf_rejection_reason_unfullfilled_prerequisite";"Vor dem Fortfahren müssen sie weitere Tests bestehen";"You need to pass some tests before you can continue with this one"

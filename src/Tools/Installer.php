@@ -137,5 +137,6 @@ class Installer extends SettingsStoreAwareInstaller
     private function installTranslations()
     {
         Translation::importTranslationsFromFile(__DIR__.'/../Resources/install/translations/export_admin_translations.csv', Translation::DOMAIN_ADMIN);
+        Translation::importTranslationsFromFile(__DIR__.'/../Resources/install/translations/export_website_translations.csv', Translation::DOMAIN_DEFAULT);
     }
 }
