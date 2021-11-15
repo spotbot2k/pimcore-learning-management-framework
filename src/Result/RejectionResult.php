@@ -19,14 +19,14 @@ class RejectionResult
 
     private ?string $reason;
 
-    private array $unfulfilledPrerequisites;
+    private array $unfulfilledPrerequisites = [];
 
     public function __construct(?string $reason = null)
     {
         $this->reason = $reason;
     }
 
-    public function isRejected()
+    public function isRejected(): bool
     {
         return !is_null($this->reason);
     }
@@ -36,7 +36,7 @@ class RejectionResult
         return $this->reason;
     }
 
-    public function getUnfulfilledPrerequisites()
+    public function getUnfulfilledPrerequisites(): array
     {
         return $this->unfulfilledPrerequisites;
     }
