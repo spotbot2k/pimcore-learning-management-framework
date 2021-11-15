@@ -12,10 +12,14 @@ namespace LearningManagementFrameworkBundle\Result;
 class RejectionResult
 {
     public const NOT_REJECTED = null;
-    public const NOT_LOGGED_IN = "lmf_rejection_reason_not_logged_in";
-    public const OUT_OF_ATTEMPTS = "lmf_rejection_reason_out_of_attempts";
-    public const UNFULFILLED_PREREQUISITE = "lmf_rejection_reason_unfullfilled_prerequisite";
-    public const ALLREADY_PASSED = "lmf_rejection_reason_already_passed";
+
+    public const NOT_LOGGED_IN = 'lmf_rejection_reason_not_logged_in';
+
+    public const OUT_OF_ATTEMPTS = 'lmf_rejection_reason_out_of_attempts';
+
+    public const UNFULFILLED_PREREQUISITE = 'lmf_rejection_reason_unfullfilled_prerequisite';
+
+    public const ALLREADY_PASSED = 'lmf_rejection_reason_already_passed';
 
     private ?string $reason;
 
