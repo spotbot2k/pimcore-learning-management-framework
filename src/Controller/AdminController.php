@@ -47,22 +47,32 @@ class AdminController extends AbstractAdminController
     {
         if ($this->userCanView()) {
             $sql = "
-                SELECT
-                    lmf.`examId` examId,
-                    lmf.`studentId` studentId,
-                    e.title,
-                    COUNT(lmf.`id`) attemptsTotal,
-                    SUM(lmf.`isActive`) attemptsActive,
-                    DATE_FORMAT(lmf.date, '%d.%m.%Y') lastAttempt,
-                    MAX(lmf.`isPassed`) passed,
-                    MIN(lmf.time) bestTime,
-                    MAX(lmf.ratio) bestRatio,
-                    (SELECT grade FROM `plugin_lmf_student_progress` WHERE `grade` IS NOT NULL ORDER BY `date` LIMIT 1) latestGrade
-                FROM `plugin_lmf_student_progress` lmf
-                LEFT JOIN `object_store_LMF_ED` e
-                    ON e.oo_id = lmf.examId
-                WHERE lmf.`studentId` = ?
-                ORDER BY date
+            SELECT
+                e.`oo_id` examId,
+                lmf.`studentId` studentId,
+                e.title,
+                COUNT(lmf.`id`) attemptsTotal,
+                SUM(lmf.`isActive`) attemptsActive,
+                DATE_FORMAT(lmf.date, '%d.%m.%Y') lastAttempt,
+                IF(MAX(lmf.`isPassed`), '+', '') passed,
+                CONCAT(MIN(lmf.time), ' s') bestTime,
+                CONCAT(MAX(lmf.ratio), ' %') bestRatio,
+                (SELECT
+                    grade
+                FROM `plugin_lmf_student_progress`
+                WHERE
+                    `grade` IS NOT NULL
+                    AND `examId` = e.oo_id
+                    AND `isActive` = 1
+                    AND TIMESTAMPDIFF(DAY, `date`, CURRENT_TIMESTAMP) <= e.`maxCertificateAge`
+                ORDER BY `date` LIMIT 1) latestGrade
+            FROM `object_store_LMF_ED` e
+            LEFT JOIN `plugin_lmf_student_progress` lmf
+                ON e.oo_id = lmf.examId
+                AND (lmf.`studentId` = ? OR lmf.`studentId`  IS NULL)
+                AND lmf.`isActive` = 1
+            GROUP BY e.`oo_id`
+            ORDER BY lmf.`date`
             ";
 
             $result = Db::get()->fetchAll($sql, [ $id ]);
@@ -82,6 +92,23 @@ class AdminController extends AbstractAdminController
             UPDATE `plugin_lmf_student_progress`
             SET `isActive` = 0
             WHERE `examId` = ? AND `studentId` = ? AND `isPassed` = 0
+        ', [
+            $request->get('examId'),
+            $request->get('studentId'),
+        ]);
+
+        return new JsonResponse();
+    }
+
+    /**
+     * @Route("/admin/lmf/exam/reset-grades", name="lmf_admin_post_exam_reset_grades", methods={"POST"})
+     */
+    public function resetExamGradesForStudent(Request $request)
+    {
+        Db::get()->executeQuery('
+            UPDATE `plugin_lmf_student_progress`
+            SET `isActive` = 0
+            WHERE `examId` = ? AND `studentId` = ? AND `grade` IS NOT NULL
         ', [
             $request->get('examId'),
             $request->get('studentId'),
