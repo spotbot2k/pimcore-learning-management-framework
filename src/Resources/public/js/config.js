@@ -181,11 +181,11 @@ pimcore.plugin.learning.management.framework.config = Class.create({
             }.bind(this, grid, record)
         }));
         menu.add(new Ext.menu.Item({
-            text: t('plugin_pimcore_learning_management_framework_action_reset_attempts'),
-            iconCls: 'pimcore_icon_unpublish',
+            text: t('plugin_pimcore_learning_management_framework_action_reset_grades'),
+            iconCls: 'pimcore_icon_delete',
             handler: function (grid, record) {
                 Ext.Ajax.request({
-                    url: "/admin/lmf/exam/reset-attempts",
+                    url: "/admin/lmf/exam/reset-grades",
                     method: 'POST',
                     params: {
                         examId: record.data.examId,
@@ -198,11 +198,11 @@ pimcore.plugin.learning.management.framework.config = Class.create({
             }.bind(this, grid, record)
         }));
         menu.add(new Ext.menu.Item({
-            text: t('plugin_pimcore_learning_management_framework_action_reset_grades'),
-            iconCls: 'pimcore_icon_delete',
+            text: t('plugin_pimcore_learning_management_framework_action_reset_attempts'),
+            iconCls: 'pimcore_icon_unpublish',
             handler: function (grid, record) {
                 Ext.Ajax.request({
-                    url: "/admin/lmf/exam/reset-grades",
+                    url: "/admin/lmf/exam/reset-attempts",
                     method: 'POST',
                     params: {
                         examId: record.data.examId,
