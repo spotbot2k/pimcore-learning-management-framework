@@ -2,6 +2,18 @@
     "name": "spotbot2k/pimcore-learning-management-framework",
     "license": "GPL-3.0-or-later",
     "type": "pimcore-bundle",
+    "support": {
+        "email": "alexander@schwirjow.de",
+        "forum": "https://www.devgarden.de"
+    },
+    "authors": [
+        {
+            "name": "Alexander Schwirjow",
+            "email": "alexander@schwirjow.de",
+            "homepage": "https://www.schwirjow.de",
+            "role": "Developer"
+        }
+    ],
     "require": {
       "pimcore/pimcore": "^6.9 || ^10.0"
     },
