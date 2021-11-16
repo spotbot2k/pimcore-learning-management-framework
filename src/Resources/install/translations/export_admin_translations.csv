@@ -1,47 +1,47 @@
 ﻿"key";"cs";"de";"en";"es";"fa";"fr";"hu";"it";"ja";"nl";"pl";"pt_BR";"ru";"sk";"sv";"sv_FI";"th";"tr";"uk";"zh_Hans"
-"Learning Management";"";"Lernmanagement";"Learning Management";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";""
-"LearningManagement";"";"Lernmanagement";"Learning Management";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";""
-"plugin_pimcore_learning_management_framework_action_open_exam";"";"Prüfung öffnen";"Open exam object";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";""
-"plugin_pimcore_learning_management_framework_action_open_student";"";"Student öffnen";"Open student object";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";""
-"plugin_pimcore_learning_management_framework_action_reload";"";"Neu laden";"Reload";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";""
-"plugin_pimcore_learning_management_framework_action_reset_attempts";"";"Versuche Zurücksetzen";"Reset Attempts";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";""
-"plugin_pimcore_learning_management_framework_action_reset_grades";"";"Noten Zurücksetzen";"Reset Grades";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";""
-"plugin_pimcore_learning_management_framework_column_attempts_active";"";"Versuche aktuell";"Attempts Active";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";""
-"plugin_pimcore_learning_management_framework_column_attempts_total";"";"Versuche gesamt";"Attempts Total";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";""
-"plugin_pimcore_learning_management_framework_column_bestRatio";"";"Bestes Verhältnis";"Best Ratio";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";""
-"plugin_pimcore_learning_management_framework_column_bestTime";"";"Beste Zeit";"Best Time";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";""
-"plugin_pimcore_learning_management_framework_column_examId";"";"Prüfung-ID";"Exam ID";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";""
-"plugin_pimcore_learning_management_framework_column_examTitle";"";"Titel";"Title";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";""
-"plugin_pimcore_learning_management_framework_column_lastAttempt";"";"Letzter Versuch";"Last Attempt";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";""
-"plugin_pimcore_learning_management_framework_column_latestGrade";"";"Letzte Note";"Latest Grade";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";""
-"plugin_pimcore_learning_management_framework_column_passed";"";"Bestanden";"Passed";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";""
-"plugin_pimcore_learning_management_framework_config_students";"";"Studenten";"Students";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";""
-"plugin_pimcore_learning_management_framework_config_toolbar";"";"Lernmanagement";"Learning Management";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";""
-"plugin_pimcore_learning_management_framework_ed_attempts";"";"Erlaubte Versuche";"Allowed Attempts";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";""
-"plugin_pimcore_learning_management_framework_ed_description";"";"Beschreibung";"Description";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";""
-"plugin_pimcore_learning_management_framework_ed_general";"";"Allgemein";"General";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";""
-"plugin_pimcore_learning_management_framework_ed_grades";"";"Noten";"Grades";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";""
-"plugin_pimcore_learning_management_framework_ed_maximal_certificate_age";"";"Gültigkeitsdauer der Zertifikate";"Max Certificate Age";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";""
-"plugin_pimcore_learning_management_framework_ed_prerequisites";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";""
-"plugin_pimcore_learning_management_framework_ed_progress";"";"Fortschritt";"Progress";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";""
-"plugin_pimcore_learning_management_framework_ed_public_certificate";"";"Öffentlicher Zertifikat";"Public Certificate";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";""
-"plugin_pimcore_learning_management_framework_ed_questions";"";"Fragen";"Question";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";""
-"plugin_pimcore_learning_management_framework_ed_ratio";"";"Verhältnis der Richtigen Antworten";"Correct Answer Ratio";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";""
-"plugin_pimcore_learning_management_framework_ed_time_limit";"";"Maximale Zeit";"Time Limit";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";""
-"plugin_pimcore_learning_management_framework_ed_title";"";"Titel";"Title";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";""
-"plugin_pimcore_learning_management_framework_ed_track_progress";"";"Protokolierung";"Track Progress";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";""
-"plugin_pimcore_learning_management_framework_ed_prerequisites";"";"Voraussetzung";"Prerequisites";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";""
-"plugin_pimcore_learning_management_framework_ed_unlocks_certificate";"";"Erzeugt einen Zertifikat";"Unlocks Certificate";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";""
-"plugin_pimcore_learning_management_framework_ed_allow_anonymous";"";"Anonyme Teilnahme erlauben";"Allow Anonymous Attendance";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";""
-"plugin_pimcore_learning_management_framework_ed_allow_grade_update";"";"Darf mehrfach bestanden werden";"Allow to pass multiple times";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";""
-"plugin_pimcore_learning_management_framework_ed_max_attempts";"";"Maximale Versuche";"Max Attempts";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";""
-"plugin_pimcore_learning_management_framework_fd_answer";"";"Antwort";"Answer";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";""
-"plugin_pimcore_learning_management_framework_fd_description";"";"Beschreibung";"Description";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";""
-"plugin_pimcore_learning_management_framework_fd_detail";"";"Einstellungen";"Detail";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";""
-"plugin_pimcore_learning_management_framework_fd_is_correct";"";"Ist richtig";"Is Correct";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";""
-"plugin_pimcore_learning_management_framework_fd_lowercase_comparsion";"";"Groß-/Kleinschreibung ignorieren";"Lowercase Comparsion";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";""
-"plugin_pimcore_learning_management_framework_fd_multiple_choise";"";"Multiple Choise";"Multiple Choise";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";""
-"plugin_pimcore_learning_management_framework_fd_description";"";"Beschreibung";"Description";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";""
-"plugin_pimcore_learning_management_framework_fd_question";"";"Frage";"Question";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";""
-"plugin_pimcore_learning_management_framework_fd_title";"";"Titel";"Title";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";""
-"plugin_pimcore_learning_management_framework_fd_text_input";"";"Text";"Text Input";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";"";""
+"Learning Management";;"Lernmanagement";"Learning Management";;;;;;;;;;;;;;;;;
+"LearningManagement";;"Lernmanagement";"Learning Management";;;;;;;;;;;;;;;;;
+"plugin_pimcore_learning_management_framework_action_open_exam";;"Prüfung öffnen";"Open exam object";;;;;;;;;;;;;;;;;
+"plugin_pimcore_learning_management_framework_action_open_student";;"Student öffnen";"Open student object";;;;;;;;;;;;;;;;;
+"plugin_pimcore_learning_management_framework_action_reload";;"Neu laden";"Reload";;;;;;;;;;;;;;;;;
+"plugin_pimcore_learning_management_framework_action_reset_attempts";;"Versuche Zurücksetzen";"Reset Attempts";;;;;;;;;;;;;;;;;
+"plugin_pimcore_learning_management_framework_action_reset_grades";;"Noten Zurücksetzen";"Reset Grades";;;;;;;;;;;;;;;;;
+"plugin_pimcore_learning_management_framework_column_attempts_active";;"Versuche aktuell";"Attempts Active";;;;;;;;;;;;;;;;;
+"plugin_pimcore_learning_management_framework_column_attempts_total";;"Versuche gesamt";"Attempts Total";;;;;;;;;;;;;;;;;
+"plugin_pimcore_learning_management_framework_column_bestRatio";;"Bestes Verhältnis";"Best Ratio";;;;;;;;;;;;;;;;;
+"plugin_pimcore_learning_management_framework_column_bestTime";;"Beste Zeit";"Best Time";;;;;;;;;;;;;;;;;
+"plugin_pimcore_learning_management_framework_column_examId";;"Prüfung-ID";"Exam ID";;;;;;;;;;;;;;;;;
+"plugin_pimcore_learning_management_framework_column_examTitle";;"Titel";"Title";;;;;;;;;;;;;;;;;
+"plugin_pimcore_learning_management_framework_column_lastAttempt";;"Letzter Versuch";"Last Attempt";;;;;;;;;;;;;;;;;
+"plugin_pimcore_learning_management_framework_column_latestGrade";;"Letzte Note";"Latest Grade";;;;;;;;;;;;;;;;;
+"plugin_pimcore_learning_management_framework_column_passed";;"Bestanden";"Passed";;;;;;;;;;;;;;;;;
+"plugin_pimcore_learning_management_framework_config_students";;"Studenten";"Students";;;;;;;;;;;;;;;;;
+"plugin_pimcore_learning_management_framework_config_toolbar";;"Lernmanagement";"Learning Management";;;;;;;;;;;;;;;;;
+"plugin_pimcore_learning_management_framework_ed_attempts";;"Erlaubte Versuche";"Allowed Attempts";;;;;;;;;;;;;;;;;
+"plugin_pimcore_learning_management_framework_ed_description";;"Beschreibung";"Description";;;;;;;;;;;;;;;;;
+"plugin_pimcore_learning_management_framework_ed_general";;"Allgemein";"General";;;;;;;;;;;;;;;;;
+"plugin_pimcore_learning_management_framework_ed_grades";;"Noten";"Grades";;;;;;;;;;;;;;;;;
+"plugin_pimcore_learning_management_framework_ed_maximal_certificate_age";;"Gültigkeitsdauer der Zertifikate";"Max Certificate Age";;;;;;;;;;;;;;;;;
+"plugin_pimcore_learning_management_framework_ed_prerequisites";;"Voraussetzungen";"Prerequisites";;;;;;;;;;;;;;;;;
+"plugin_pimcore_learning_management_framework_ed_progress";;"Fortschritt";"Progress";;;;;;;;;;;;;;;;;
+"plugin_pimcore_learning_management_framework_ed_public_certificate";;"Öffentlicher Zertifikat";"Public Certificate";;;;;;;;;;;;;;;;;
+"plugin_pimcore_learning_management_framework_ed_questions";;"Fragen";"Question";;;;;;;;;;;;;;;;;
+"plugin_pimcore_learning_management_framework_ed_ratio";;"Verhältnis der Richtigen Antworten";"Correct Answer Ratio";;;;;;;;;;;;;;;;;
+"plugin_pimcore_learning_management_framework_ed_time_limit";;"Maximale Zeit";"Time Limit";;;;;;;;;;;;;;;;;
+"plugin_pimcore_learning_management_framework_ed_title";;"Titel";"Title";;;;;;;;;;;;;;;;;
+"plugin_pimcore_learning_management_framework_ed_track_progress";;"Protokolierung";"Track Progress";;;;;;;;;;;;;;;;;
+"plugin_pimcore_learning_management_framework_ed_prerequisites";;"Voraussetzung";"Prerequisites";;;;;;;;;;;;;;;;;
+"plugin_pimcore_learning_management_framework_ed_unlocks_certificate";;"Erzeugt einen Zertifikat";"Unlocks Certificate";;;;;;;;;;;;;;;;;
+"plugin_pimcore_learning_management_framework_ed_allow_anonymous";;"Anonyme Teilnahme erlauben";"Allow Anonymous Attendance";;;;;;;;;;;;;;;;;
+"plugin_pimcore_learning_management_framework_ed_allow_grade_update";;"Darf mehrfach bestanden werden";"Allow to pass multiple times";;;;;;;;;;;;;;;;;
+"plugin_pimcore_learning_management_framework_ed_max_attempts";;"Maximale Versuche";"Max Attempts";;;;;;;;;;;;;;;;;
+"plugin_pimcore_learning_management_framework_fd_answer";;"Antwort";"Answer";;;;;;;;;;;;;;;;;
+"plugin_pimcore_learning_management_framework_fd_description";;"Beschreibung";"Description";;;;;;;;;;;;;;;;;
+"plugin_pimcore_learning_management_framework_fd_detail";;"Einstellungen";"Detail";;;;;;;;;;;;;;;;;
+"plugin_pimcore_learning_management_framework_fd_is_correct";;"Ist richtig";"Is Correct";;;;;;;;;;;;;;;;;
+"plugin_pimcore_learning_management_framework_fd_lowercase_comparsion";;"Groß-/Kleinschreibung ignorieren";"Lowercase Comparsion";;;;;;;;;;;;;;;;;
+"plugin_pimcore_learning_management_framework_fd_multiple_choise";;"Multiple Choise";"Multiple Choise";;;;;;;;;;;;;;;;;
+"plugin_pimcore_learning_management_framework_fd_description";;"Beschreibung";"Description";;;;;;;;;;;;;;;;;
+"plugin_pimcore_learning_management_framework_fd_question";;"Frage";"Question";;;;;;;;;;;;;;;;;
+"plugin_pimcore_learning_management_framework_fd_title";;"Titel";"Title";;;;;;;;;;;;;;;;;
+"plugin_pimcore_learning_management_framework_fd_text_input";;"Text";"Text Input";;;;;;;;;;;;;;;;;
