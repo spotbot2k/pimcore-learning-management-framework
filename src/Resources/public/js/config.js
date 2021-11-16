@@ -42,12 +42,12 @@ pimcore.plugin.learning.management.framework.config = Class.create({
                 animate: true,
                 containerScroll: true,
                 width: 300,
-                title: t('plugin_pimcore_learning_management_framework_config_students'),
                 root: {
                     id: '0',
+                    text: t('plugin_pimcore_learning_management_framework_config_students'),
                     expanded: true
                 },
-                rootVisible: false,
+                rootVisible: true,
                 listeners: {
                     itemclick: this.onTreeNodeClick.bind(this),
                     itemcontextmenu: this.onStudentContextmenu.bind(this),
