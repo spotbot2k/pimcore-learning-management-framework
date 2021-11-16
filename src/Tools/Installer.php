@@ -35,8 +35,8 @@ class Installer extends SettingsStoreAwareInstaller
 
     public function install()
     {
-        $this->installClasses();
         $this->installFieldCollections();
+        $this->installClasses();
         $this->installPermissions();
         $this->installDatabaseTables();
         $this->installTranslations();

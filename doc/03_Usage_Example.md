@@ -3,7 +3,7 @@
 There is a minimal difference between the two major versions of Pimcore - here are the examples of usage in a structure of the official Pimcore demo.
 
 - [Basic usage for Pimcore X](03_Usage_Example.md#basic-usage-for-pimcore-x)
-- [Basic usage for Pimcore 6.9](03_Usage_Example.md#basic-usage-for-pimcore-6.9)
+- [Basic usage for Pimcore 6.9](03_Usage_Example.md#basic-usage-for-pimcore-69)
 
 ## Basic usage for Pimcore X
 
