@@ -1,7 +1,7 @@
 {
     "id": "LMF_ED",
     "description": "",
-    "modificationDate": 1637087140,
+    "modificationDate": 1637165819,
     "parentClass": "",
     "implementsInterfaces": "",
     "listingParentClass": "",
@@ -535,7 +535,7 @@
         "locked": false,
         "icon": null
     },
-    "icon": "\/bundles\/pimcoreadmin\/img\/flat-color-icons\/file-types.svg",
+    "icon": "\/bundles\/pimcorelearningmanagementframework\/img\/quiz.svg",
     "previewUrl": "",
     "group": "LearningManagement",
     "showAppLoggerTab": false,

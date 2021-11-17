@@ -22,7 +22,7 @@ pimcore.plugin.learning.management.framework.config = Class.create({
                 fields: [
                     'id',
                     'text',
-                    { name: 'icon', defaultValue: '/bundles/pimcorelearningmanagementframework/img/person_black_24dp.svg' }
+                    { name: 'icon', defaultValue: '/bundles/pimcorelearningmanagementframework/img/person.svg' }
                 ]
             });
 
@@ -42,12 +42,12 @@ pimcore.plugin.learning.management.framework.config = Class.create({
                 animate: true,
                 containerScroll: true,
                 width: 300,
+                title: t('plugin_pimcore_learning_management_framework_config_students'),
                 root: {
                     id: '0',
-                    text: t('plugin_pimcore_learning_management_framework_config_students'),
-                    expanded: true
+                    expanded: false
                 },
-                rootVisible: true,
+                rootVisible: false,
                 listeners: {
                     itemclick: this.onTreeNodeClick.bind(this),
                     itemcontextmenu: this.onStudentContextmenu.bind(this),
@@ -79,7 +79,7 @@ pimcore.plugin.learning.management.framework.config = Class.create({
             this.panel = new Ext.Panel({
                 id: 'plugin_pimcore_learning_management_framework_config_tab',
                 title: t('plugin_pimcore_learning_management_framework_config_toolbar'),
-                icon: '/bundles/pimcorelearningmanagementframework/img/school_white_24dp.svg',
+                icon: '/bundles/pimcorelearningmanagementframework/img/school.svg',
                 border: false,
                 layout: 'border',
                 closable: true,
@@ -152,7 +152,7 @@ pimcore.plugin.learning.management.framework.config = Class.create({
         });
         let tab = new Ext.Panel({
             title: record.data.text,
-            icon: '/bundles/pimcorelearningmanagementframework/img/person_black_24dp.svg',
+            icon: '/bundles/pimcorelearningmanagementframework/img/person.svg',
             closable: true,
             layout: 'fit',
             items: [ grid ],

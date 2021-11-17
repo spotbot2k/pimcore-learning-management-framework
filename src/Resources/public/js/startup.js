@@ -14,7 +14,7 @@ pimcore.plugin.learning_management_framework = Class.create(pimcore.plugin.admin
         if (user.admin || user.isAllowed("plugin_lmf_manage") || user.isAllowed("plugin_lmf_view")) {
             let navEl = Ext.get('pimcore_menu_search').insertSibling(`
                 <li id="pimcore_menu_learning_management_framework" data-menu-tooltip="${t('plugin_pimcore_learning_management_framework_config_toolbar')}" class="pimcore_menu_item">
-                    <img src="/bundles/pimcorelearningmanagementframework/img/school_white_24dp.svg">
+                    <img src="/bundles/pimcorelearningmanagementframework/img/school.svg">
                 </li>`
             , 'before');
 
