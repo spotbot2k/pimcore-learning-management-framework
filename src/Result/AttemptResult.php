@@ -42,4 +42,13 @@ class AttemptResult
         $this->isPassed = $isPassed;
         $this->hash = $hash;
     }
+
+    public function get($key)
+    {
+        if (property_exists($this, $key)) {
+            return $this->{$key};
+        }
+
+        return null;
+    }
 }

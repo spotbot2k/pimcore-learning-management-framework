@@ -35,7 +35,7 @@ class ExamType extends AbstractType
         ]);
 
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
-            $event->getForm()->add('questions', QuestionCollectionType::class);
+            $event->getForm()->add('questions', QuestionCollectionType::class, [ 'label' => false ]);
         });
 
         $builder->addEventListener(FormEvents::POST_SET_DATA, function (FormEvent $event) {

@@ -45,6 +45,7 @@ class ExamHelper
         $timeTaken = time() - $data['initts'];
         $isPassed = false;
         $gradeAchieved = null;
+        $hash = '';
 
         if (array_key_exists('questions', $data)) {
             foreach ($exam->getQuestions() as $idx => $question) {
@@ -82,10 +83,10 @@ class ExamHelper
 
         // Track user progress if allowed to
         if (!is_null($this->user) && $exam->getTrackStudentProgress()) {
-            $this->trackProgress($exam, $this->user, $isPassed, $gradeAchieved, $ratio, $timeTaken);
+            $hash = $this->trackProgress($exam, $this->user, $isPassed, $gradeAchieved, $ratio, $timeTaken);
         }
 
-        return new AttemptResult($correctAnswers, $incorrectAnswers, $ratio, $timeTaken, $gradeAchieved, $isPassed, $this->getTrackingEntryHash($exam));
+        return new AttemptResult($correctAnswers, $incorrectAnswers, $ratio, $timeTaken, $gradeAchieved, $isPassed, $hash);
     }
 
     public function isSudentLoggedIn()
@@ -168,9 +169,7 @@ class ExamHelper
 
     public function validateCertificate(string $hash): ValidationResult
     {
-        $cert = $this->getCertificateByHash($hash);
-
-        return new ValidationResult();
+        return new ValidationResult($this->getCertificateByHash($hash));
     }
 
     private function processQuestion(string $type, AbstractData $question, $submitedValue): bool
@@ -206,10 +205,12 @@ class ExamHelper
     {
         $uuid = $this->getTrackingEntryHash($exam);
 
-        return Db::get()->executeQuery(
+        Db::get()->executeQuery(
             'INSERT INTO `plugin_lmf_student_progress` (`uuid`, `examId`, `studentId`, `isPassed`, `grade`, `ratio`, `time`) VALUES (?, ?, ?, ?, ?, ?, ?)',
             [ $uuid, $exam->getId(), $user->getId(), $isPassed, $grade, $ratio, $time ]
         );
+
+        return $uuid;
     }
 
     private function getTrackingEntryHash(ExamDefinition $exam): string
@@ -217,7 +218,7 @@ class ExamHelper
         return sprintf('%s-%s-%s', bin2hex(random_bytes(6)), sha1(time()), bin2hex($exam->getId()));
     }
 
-    private function getCertificateByHash(string $hash): ?array
+    private function getCertificateByHash(string $hash)
     {
         return Db::get()->fetchRow('
             SELECT *
