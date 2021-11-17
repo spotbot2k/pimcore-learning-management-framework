@@ -134,7 +134,9 @@ class LMFController extends FrontendController
                     <p>You have passed <b>"{{ exam.getTitle() }}"</b>, well done!</p>
                     <p>with <b>"{{ result.get('grade') }}"</b></p>
                     <p><b>{{ result.get('ratio') }}%</b> of your answers were correct!</p>
-                    <p>{{ url("lmf-exam-cert", { "id": result.get("examId"), "hash": result.get("uuid") }) }}</p>
+                    {% if exam.getPublicCertificate() %}
+                        <p>{{ url("lmf-exam-cert", { "id": result.get("examId"), "hash": result.get("uuid") }) }}</p>
+                    {% endif %}
                 </center>
             </div>
         {% else %}
