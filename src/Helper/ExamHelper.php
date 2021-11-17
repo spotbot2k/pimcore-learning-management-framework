@@ -20,7 +20,7 @@ use Symfony\Component\Security\Core\Security;
 
 class ExamHelper
 {
-    private $user = null;
+    private ?Concrete $user = null;
 
     private $attemptResetInterval;
 
