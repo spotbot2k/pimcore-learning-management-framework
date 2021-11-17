@@ -11,7 +11,7 @@ namespace LearningManagementFrameworkBundle\Result;
 
 class ValidationResult
 {
-    private array $validationResult;
+    private ?array $validationResult = null;
 
     public function __construct($result)
     {
@@ -22,15 +22,20 @@ class ValidationResult
 
     public function isValid(): bool
     {
-        return count($this->validationResult) > 0;
+        return !is_null($this->validationResult);
     }
 
     public function get($key)
     {
-        if (array_key_exists($key, $this->validationResult)) {
+        if (!is_null($this->validationResult) && array_key_exists($key, $this->validationResult)) {
             return $this->validationResult[$key];
         }
 
         return null;
+    }
+
+    public static function negative()
+    {
+        return new ValidationResult(false);
     }
 }

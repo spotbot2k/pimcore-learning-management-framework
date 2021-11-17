@@ -125,10 +125,10 @@ class LMFController extends FrontendController
 
 {% block content %}
     <div id="main-content" class="main-content mb-5">
-        <div class="page-header">
-            <h1>Congratulations!</h1>
-        </div>
         {% if result is defined and result.isValid() %}
+            <div class="page-header">
+                <h1>Congratulations!</h1>
+            </div>
             <div class="lmf-cert pt-5 pb-5" style="border: 5px solid red;">
                 <center>
                     <p>You have passed <b>"{{ exam.getTitle() }}"</b>, well done!</p>
@@ -137,6 +137,11 @@ class LMFController extends FrontendController
                     <p>{{ url("lmf-exam-cert", { "id": result.get("examId"), "hash": result.get("uuid") }) }}</p>
                 </center>
             </div>
+        {% else %}
+            <div class="page-header">
+                <h1>Sorry!</h1>
+            </div>
+            <p>It seems not to be a valid certificate</p>
         {% endif %}
     </div>
 {% endblock %}

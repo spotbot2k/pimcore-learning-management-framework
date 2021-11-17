@@ -169,7 +169,18 @@ class ExamHelper
 
     public function validateCertificate(string $hash): ValidationResult
     {
-        return new ValidationResult($this->getCertificateByHash($hash));
+        $cert = $this->getCertificateByHash($hash);
+
+        if (is_array($cert)) {
+            $exam = ExamDefinition::getById($cert['examId']);
+            if ($exam && $exam->isPublished()) {
+                if ($exam->getPublicCertificate() || ($this->user && $this->user->getId() === $cert['studentId'])) {
+                    return new ValidationResult($cert);
+                }
+            }
+        }
+
+        return ValidationResult::negative();
     }
 
     private function processQuestion(string $type, AbstractData $question, $submitedValue): bool
