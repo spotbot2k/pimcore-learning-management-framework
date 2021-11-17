@@ -174,7 +174,7 @@ class ExamHelper
         if (is_array($cert)) {
             $exam = ExamDefinition::getById($cert['examId']);
             if ($exam && $exam->isPublished()) {
-                if ($exam->getPublicCertificate() || ($this->user && $this->user->getId() === $cert['studentId'])) {
+                if ($exam->getPublicCertificate() || ($this->user && $this->user->getId() == $cert['studentId'])) {
                     return new ValidationResult($cert);
                 }
             }
