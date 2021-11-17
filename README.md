@@ -1,6 +1,6 @@
 # Pimcore Learning Management Framework
 
-![Backend UI](doc/img/backend_ui.png)
+![Backend UI](doc/img/pic_03.png)
 
 This framework is inspired by [Pimcore Academy](https://pimcore.com/de/developer/academy), [Programming Hub](https://programminghub.io/) and many other resources that provide knowledge to the comunity.
 
@@ -12,3 +12,6 @@ As it is implied by the name this repository does not provide a ready to use sol
 4. [Customization](doc/04_Customization.md)
 
 Includes parts of [Material design icons](https://github.com/google/material-design-icons/blob/master/LICENSE)
+
+![Backend UI](doc/img/pic_01.png)
+![Backend UI](doc/img/pic_02.png)
