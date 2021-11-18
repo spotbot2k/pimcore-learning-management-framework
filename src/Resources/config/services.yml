@@ -17,3 +17,9 @@ services:
     arguments:
       $defaultStudentClass: '%pimcore_learning_management_framework.student_class%'
       $attemptResetInterval: '%pimcore_learning_management_framework.attempt_reset_period%'
+
+  LearningManagementFrameworkBundle\Maintenance\CleanupMaintenanceTask:
+    tags:
+        - { name: pimcore.maintenance.task, type: lmf_cleanup_maintenance_task }
+    arguments:
+      $defaultStudentClass: '%pimcore_learning_management_framework.student_class%'
