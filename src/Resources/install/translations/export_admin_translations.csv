@@ -25,7 +25,7 @@
 "plugin_pimcore_learning_management_framework_ed_prerequisites";;"Voraussetzungen";"Prerequisites";;;;;;;;;;;;;;;;;
 "plugin_pimcore_learning_management_framework_ed_progress";;"Fortschritt";"Progress";;;;;;;;;;;;;;;;;
 "plugin_pimcore_learning_management_framework_ed_public_certificate";;"Öffentlicher Zertifikat";"Public Certificate";;;;;;;;;;;;;;;;;
-"plugin_pimcore_learning_management_framework_ed_questions";;"Fragen";"Question";;;;;;;;;;;;;;;;;
+"plugin_pimcore_learning_management_framework_ed_questions";;"Fragen";"Questions";;;;;;;;;;;;;;;;;
 "plugin_pimcore_learning_management_framework_ed_ratio";;"Verhältnis der Richtigen Antworten";"Correct Answer Ratio";;;;;;;;;;;;;;;;;
 "plugin_pimcore_learning_management_framework_ed_time_limit";;"Maximale Zeit";"Time Limit";;;;;;;;;;;;;;;;;
 "plugin_pimcore_learning_management_framework_ed_title";;"Titel";"Title";;;;;;;;;;;;;;;;;
@@ -35,6 +35,9 @@
 "plugin_pimcore_learning_management_framework_ed_allow_anonymous";;"Anonyme Teilnahme erlauben";"Allow Anonymous Attendance";;;;;;;;;;;;;;;;;
 "plugin_pimcore_learning_management_framework_ed_allow_grade_update";;"Darf mehrfach bestanden werden";"Allow to pass multiple times";;;;;;;;;;;;;;;;;
 "plugin_pimcore_learning_management_framework_ed_max_attempts";;"Maximale Versuche";"Max Attempts";;;;;;;;;;;;;;;;;
+"plugin_pimcore_learning_management_framework_ed_content";;"Inhalt";"Content";;;;;;;;;;;;;;;;;
+"plugin_pimcore_learning_management_framework_ed_contentPages";;"Dokumente und Seiten";"Documents";;;;;;;;;;;;;;;;;
+"plugin_pimcore_learning_management_framework_ed_downloads";;"Downloads";"Downloads";;;;;;;;;;;;;;;;;
 "plugin_pimcore_learning_management_framework_fd_answer";;"Antwort";"Answer";;;;;;;;;;;;;;;;;
 "plugin_pimcore_learning_management_framework_fd_description";;"Beschreibung";"Description";;;;;;;;;;;;;;;;;
 "plugin_pimcore_learning_management_framework_fd_detail";;"Einstellungen";"Detail";;;;;;;;;;;;;;;;;
