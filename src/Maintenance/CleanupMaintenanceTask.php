@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * This file is part of the Pimcore Learning Management Framework
+ * Docs and updates: https://github.com/spotbot2k/pimcore-learning-management-framework
+ *
+ *  @license GPLv3
+ */
+
 namespace LearningManagementFrameworkBundle\Maintenance;
 
 use Pimcore\Db;
@@ -17,7 +24,7 @@ class CleanupMaintenanceTask implements TaskInterface
     public function execute()
     {
         $studentClassName = sprintf("Pimcore\Model\DataObject\%s", $this->defaultStudentClass);
-        $sql = sprintf("
+        $sql = sprintf('
             DELETE lmf FROM `plugin_lmf_student_progress` lmf
             LEFT JOIN  `object_store_LMF_ED` e
                 ON e.oo_id = lmf.examId
@@ -26,7 +33,7 @@ class CleanupMaintenanceTask implements TaskInterface
             WHERE
                 e.oo_id IS NULL
                 OR s.oo_id IS NULL
-            " ,
+            ',
             $studentClassName::classId()
         );
         Db::get()->executeQuery($sql);
