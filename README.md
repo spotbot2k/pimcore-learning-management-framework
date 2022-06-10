@@ -1,3 +1,5 @@
+ ![https://img.shields.io/static/v1?style=flat-square&color=6428B4&message=X&label=Pimcore](https://img.shields.io/static/v1?style=flat-square&color=6428B4&message=X&label=Pimcore) ![https://img.shields.io/static/v1?style=flat-square&color=6428B4&message=6.9&label=Pimcore](https://img.shields.io/static/v1?style=flat-square&color=6428B4&message=6.9&label=Pimcore) [![](https://img.shields.io/packagist/v/spotbot2k/pimcore-learning-management-framework.svg?style=flat-square&color=F28D1A&logoColor=white)](https://packagist.org/packages/spotbot2k/pimcore-learning-management-framework)
+
 # Pimcore Learning Management Framework
 
 ![Backend UI](doc/img/pic_03.png)

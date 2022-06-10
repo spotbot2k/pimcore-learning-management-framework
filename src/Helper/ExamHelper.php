@@ -24,11 +24,8 @@ class ExamHelper
 
     private $attemptResetInterval;
 
-    public function __construct(
-        string $defaultStudentClass,
-        int $attemptResetInterval = 0,
-        Security $security
-    ) {
+    public function __construct(string $defaultStudentClass, int $attemptResetInterval, Security $security)
+    {
         $user = $security->getUser();
         $class = sprintf("Pimcore\Model\DataObject\%s", $defaultStudentClass);
         if ($user instanceof $class) {

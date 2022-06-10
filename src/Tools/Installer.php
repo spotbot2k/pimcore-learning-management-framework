@@ -59,7 +59,7 @@ class Installer extends SettingsStoreAwareInstaller
         if (!$class) {
             $class = new ClassDefinition();
             $class->setName($classname);
-            $class->setGroup('CustomerManagement');
+            $class->setGroup('LMF');
 
             $json = file_get_contents($filepath);
 
