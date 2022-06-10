@@ -1,18 +1,25 @@
 <?php
 
+/**
+ * This file is part of the Pimcore Learning Management Framework
+ * Docs and updates: https://github.com/spotbot2k/pimcore-learning-management-framework
+ *
+ *  @license GPLv3
+ */
+
 namespace LearningManagementFrameworkBundle\Document\Areabrick;
 
-use Pimcore\Model\Document\Editable;
-use Pimcore\Model\Document\Editable\Area\Info;
-use LearningManagementFrameworkBundle\Helper\ExamHelper;
 use LearningManagementFrameworkBundle\Form\ExamType;
+use LearningManagementFrameworkBundle\Helper\ExamHelper;
 use Pimcore\Extension\Document\Areabrick\AbstractTemplateAreabrick;
 use Pimcore\Extension\Document\Areabrick\EditableDialogBoxConfiguration;
 use Pimcore\Extension\Document\Areabrick\EditableDialogBoxInterface;
-use Symfony\Contracts\Translation\TranslatorInterface;
+use Pimcore\Model\Document\Editable;
+use Pimcore\Model\Document\Editable\Area\Info;
 use Pimcore\Model\Translation;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class Exam extends AbstractTemplateAreabrick implements EditableDialogBoxInterface
 {
@@ -48,7 +55,7 @@ class Exam extends AbstractTemplateAreabrick implements EditableDialogBoxInterfa
             $result = $this->helper->process($examObject, $info->getRequest()->get(ExamType::PREFIX));
 
             if ($result->isPassed) {
-                $info->setParam('result', $this->helper->validateCertificate($result->hash ));
+                $info->setParam('result', $this->helper->validateCertificate($result->hash));
             }
 
             $info->setParam('ratio', $result->ratio);
