@@ -3,3 +3,7 @@
 "lmf_rejection_reason_not_logged_in";"Nicht eingeloggt";"Not logged in"
 "lmf_rejection_reason_out_of_attempts";"Sie haben zu oft versucht bitte später probieren";"You failed too often, please wait a bit to try again"
 "lmf_rejection_reason_unfullfilled_prerequisite";"Vor dem Fortfahren müssen sie weitere Tests bestehen";"You need to pass some tests before you can continue with this one"
+"lmf_rejection_custom";"Sie können nicht teilnehmen";"You can not attend. Reason"
+"lmf_rejection_ratio";"Sie haben nicht bestanden, %ratio%% Antworten waren korrekt.";"You have not passed - only <b>%ratio%%</b> of your answers were correct."
+"lmf_rejection_attempts";"Sie haben %attempts% versuche übrig.";"You have %attempts% attempt(s) left."
+"lmf_success_passed";"Sie haben mit der Note %grade% bestanden, gut gemacht! %ratio%% der Antworten Waren korrekt!";"You have passed with %grade%, well done! %ratio%% of your answers were correct!"
