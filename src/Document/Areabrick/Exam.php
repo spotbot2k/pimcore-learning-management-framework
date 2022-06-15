@@ -47,6 +47,10 @@ class Exam extends AbstractTemplateAreabrick implements EditableDialogBoxInterfa
     public function action(Info $info): ?Response
     {
         $examObject = $this->getDocumentEditable($info->getDocument(), 'relation', 'examObject')->getElement();
+        if (is_null($examObject)) {
+            return null;
+        }
+
         $canAttend = $this->helper->canAttend($examObject);
         $form = $this->formFactory->createBuilder(ExamType::class, $examObject)->getForm();
 
@@ -55,7 +59,7 @@ class Exam extends AbstractTemplateAreabrick implements EditableDialogBoxInterfa
             $result = $this->helper->process($examObject, $info->getRequest()->get(ExamType::PREFIX));
 
             if ($result->isPassed) {
-                $info->setParam('result', $this->helper->validateCertificate($result->hash));
+                $info->setParam('result', $result);
             }
 
             $info->setParam('ratio', $result->ratio);

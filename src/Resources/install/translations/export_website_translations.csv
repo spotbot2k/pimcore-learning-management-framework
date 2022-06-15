@@ -7,3 +7,4 @@
 "lmf_rejection_ratio";"Sie haben nicht bestanden, %ratio%% Antworten waren korrekt.";"You have not passed - only <b>%ratio%%</b> of your answers were correct."
 "lmf_rejection_attempts";"Sie haben %attempts% versuche übrig.";"You have %attempts% attempt(s) left."
 "lmf_success_passed";"Sie haben mit der Note %grade% bestanden, gut gemacht! %ratio%% der Antworten Waren korrekt!";"You have passed with %grade%, well done! %ratio%% of your answers were correct!"
+"lmf_select_object_first";"Bitte einen Datenobjekt zuweisen";"Please select a dataobject first"

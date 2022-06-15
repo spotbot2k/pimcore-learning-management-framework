@@ -38,7 +38,7 @@ class AttemptResult
         $this->incorrectAnswers = $incorrectAnswers;
         $this->ratio = $ratio;
         $this->time = $time;
-        $this->gradAchieved = $gradeAchieved;
+        $this->gradeAchieved = $gradeAchieved;
         $this->isPassed = $isPassed;
         $this->hash = $hash;
     }

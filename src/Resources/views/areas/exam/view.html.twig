@@ -1,37 +1,41 @@
-{% form_theme form 'bootstrap_4_layout.html.twig' %}
+{% if form is defined %}
+    {% form_theme form 'bootstrap_4_layout.html.twig' %}
 
-<div id="main-content" class="main-content mb-5">
-    <div class="page-header">
-        <h1>{{ exam.getTitle() }}</h1>
-    </div>
-
-    {{ exam.getDescription() | raw }}
-
-    {% if result is defined and result.isValid() %}
-        <div class="alert alert-success" role="alert">
-            {{ 'lmf_success_passed' | trans({ '%ratio%': result.get('ratio'), '%grade%': result.get('grade') }) }}
+    <div id="main-content" class="main-content mb-5">
+        <div class="page-header">
+            <h1>{{ exam.getTitle() }}</h1>
         </div>
-    {% elseif canAttend.isRejected() %}
-        <div class="alert alert-danger" role="alert">
-            {{ 'lmf_rejection_custom' | trans }}: {{ canAttend.getReason() | trans }}
 
-            {% set testsLeft = canAttend.getUnfulfilledPrerequisites() %}
-            {% if testsLeft is not empty %}
-                <p>{{ 'lmf_rejection_reason_unfullfilled_prerequisite' | trans }}</p>
-                {% for test in testsLeft %}
-                    <a href="/lmf/form/{{ test.getId() }}">{{ test.getTitle() }}</a><br>
-                {% endfor %}
-            {% endif %}
-        </div>
-    {% else %}
-        {% if ratio is not null %}
+        {{ exam.getDescription() | raw }}
+
+        {% if result is defined and result.isPassed %}
+            <div class="alert alert-success" role="alert">
+                {{ 'lmf_success_passed' | trans({ '%ratio%': result.get('ratio'), '%grade%': result.get('gradeAchieved') }) }}
+            </div>
+        {% elseif canAttend.isRejected() %}
             <div class="alert alert-danger" role="alert">
-                {{ 'lmf_rejection_ratio' | trans({ '%ratio%': ratio }) }}
-                {% if attempts is defined %}
-                    {{ 'lmf_rejection_attempts' | trans({ '%attempts%': attempts }) }}
+                {{ 'lmf_rejection_custom' | trans }}: {{ canAttend.getReason() | trans }}
+
+                {% set testsLeft = canAttend.getUnfulfilledPrerequisites() %}
+                {% if testsLeft is not empty %}
+                    <p>{{ 'lmf_rejection_reason_unfullfilled_prerequisite' | trans }}</p>
+                    {% for test in testsLeft %}
+                        <a href="/lmf/form/{{ test.getId() }}">{{ test.getTitle() }}</a><br>
+                    {% endfor %}
                 {% endif %}
             </div>
+        {% else %}
+            {% if ratio is defined and ratio is not null %}
+                <div class="alert alert-danger" role="alert">
+                    {{ 'lmf_rejection_ratio' | trans({ '%ratio%': ratio }) | raw }}
+                    {% if attempts is defined %}
+                        {{ 'lmf_rejection_attempts' | trans({ '%attempts%': attempts }) }}
+                    {% endif %}
+                </div>
+            {% endif %}
+            {{ form(form) }}
         {% endif %}
-        {{ form(form) }}
-    {% endif %}
-</div>
+    </div>
+{% elseif editmode %}
+    <i>{{ 'lmf_select_object_first' | trans }} </i>
+{% endif %}
